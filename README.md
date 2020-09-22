@@ -1,6 +1,9 @@
 # NewsBucket
 
-A new Flutter project.
+A Flutter project.
+NewsBucket is an application that show latest news in INDIA. The also has the categories like Business, Sports, health and etc.
+If you wnat to search the news of perticular category, no problem the app has that facility too. 
+Click on the search icon on the appbar and search on the topic you want.
 
 ## Getting Started
 
