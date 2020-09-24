@@ -13,7 +13,7 @@ class CustomSearchNewsArticalsProviders with ChangeNotifier {
   Future<void> fetchCustomSearchNews(String searchString) async {
     try {
       final url =
-          "https://newsapi.org/v2/everything?q=${searchString.toLowerCase()}&language=en&sortBy=relevancy,publishedAt&apiKey=186a96a01cdd4e88b16ad04df6be8e33";
+          "https://newsapi.org/v2/everything?q=${searchString.toLowerCase()}&language=en&sortBy=relevancy,popularity,publishedAt&apiKey=186a96a01cdd4e88b16ad04df6be8e33";
       final response = await http.get(url);
       final jsonBody = json.decode(response.body);
 

@@ -28,9 +28,9 @@ class CategoryNews extends StatelessWidget {
             SliverAppBar(
               elevation: 1,
               expandedHeight: 100,
-              // pinned: true,
-              snap: true,
-              floating: true,
+              pinned: true,
+              // snap: true,
+              // floating: true,
               title: AppTitle(),
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
@@ -38,7 +38,7 @@ class CategoryNews extends StatelessWidget {
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      " ${categoryTitle.toUpperCase()} Headlines",
+                      " $categoryTitle Headlines",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.workSans(
                           color: Colors.black,

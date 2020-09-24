@@ -38,9 +38,9 @@ class _MainScreenState extends State<MainScreen> {
             SliverAppBar(
               elevation: 1,
               expandedHeight: 150,
-              // pinned: true,
-              snap: true,
-              floating: true,
+              pinned: true,
+              // snap: true,
+              // floating: true,
               title: AppTitle(),
               actions: [
                 IconButton(
@@ -124,7 +124,7 @@ class _MainScreenState extends State<MainScreen> {
                                           horizontal: 2, vertical: 5),
                                       padding: EdgeInsets.all(3),
                                       child: Text(
-                                          "Updated at ${DateFormat("dd/MM/yyyy h:m a").format(dateTime)}",
+                                          "Updated at ${DateFormat("dd/MM/yyyy hh:mm a").format(dateTime)}",
                                           textAlign: TextAlign.right,
                                           style: GoogleFonts.rubik(
                                             fontSize: 12,

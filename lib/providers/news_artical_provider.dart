@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../mconstants.dart';
+
 import '../models/news_artical_modal.dart';
 
 class NewsArticalProvider with ChangeNotifier {
@@ -13,7 +15,7 @@ class NewsArticalProvider with ChangeNotifier {
   Future<void> fetchTopHeadlines() async {
     try {
       final url =
-          "https://newsapi.org/v2/top-headlines?country=in&apiKey=186a96a01cdd4e88b16ad04df6be8e33";
+          "https://newsapi.org/v2/top-headlines?country=in&apiKey=${MConstant.mAPIKey}";
 
       final response = await http.get(url);
       final jsonBody = json.decode(response.body);

@@ -8,6 +8,7 @@ import './providers/custom_search_articals_providers.dart';
 import './screens/main_screen.dart';
 import './screens/news_view.dart';
 import './screens/category_news_screen.dart';
+import './screens/news_display.dart';
 
 import './helpers/custom_route.dart';
 
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         routes: {
           NewsView.routeName: (ctx) => NewsView(),
           CategoryNews.routeName: (ctx) => CategoryNews(),
+          NewsDisplayScreen.routeName: (ctx) => NewsDisplayScreen(),
         },
       ),
     );

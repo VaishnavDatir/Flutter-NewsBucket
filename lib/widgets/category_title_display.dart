@@ -16,10 +16,8 @@ class CategoryTitleDisplayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(CategoryNews.routeName, arguments: {
-          "caterogyName": cTitle.toLowerCase(),
-          "caterogyImageUrl": cImgUrl
-        });
+        Navigator.of(context).pushNamed(CategoryNews.routeName,
+            arguments: {"caterogyName": cTitle, "caterogyImageUrl": cImgUrl});
       },
       child: Container(
         margin: EdgeInsets.only(right: 5),

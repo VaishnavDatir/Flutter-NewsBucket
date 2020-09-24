@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 
+import '../mconstants.dart';
 import '../models/news_artical_modal.dart';
 
 class CategoryNewsArticalProvider with ChangeNotifier {
@@ -14,7 +15,7 @@ class CategoryNewsArticalProvider with ChangeNotifier {
   Future<void> fetchCategoryNews(String categoryName) async {
     try {
       final url =
-          "https://newsapi.org/v2/top-headlines?country=in&category=$categoryName&apiKey=186a96a01cdd4e88b16ad04df6be8e33";
+          "https://newsapi.org/v2/top-headlines?country=in&category=${categoryName.toLowerCase()}&apiKey=${MConstant.mAPIKey}";
 
       final response = await http.get(url);
       final jsonBody = json.decode(response.body);

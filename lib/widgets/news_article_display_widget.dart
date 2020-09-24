@@ -1,7 +1,7 @@
-import 'package:NewsBucket/screens/news_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../screens/news_display.dart';
 import '../models/news_artical_modal.dart' as nam;
 
 class NewsArticleDisplayWidget extends StatelessWidget {
@@ -12,9 +12,16 @@ class NewsArticleDisplayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(NewsView.routeName,
-            arguments: {"newsUrl": newsArtical.newsUrl});
+        /*  Navigator.of(context).pushNamed(NewsView.routeName,
+            arguments: {"newsUrl": newsArtical.newsUrl}); */ //To OPEN WEBSITE
         // print(newsArtical.newsUrl.toString());
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => NewsDisplayScreen(
+              ndNewsArtical: newsArtical,
+            ),
+          ),
+        );
       },
       child: Card(
         elevation: 2,
@@ -61,12 +68,15 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                   : Container(
                       height: 200,
                       width: double.infinity,
-                      child: FadeInImage(
-                        placeholder:
-                            AssetImage("dev_assets/NewsBucketLogo.png"),
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          newsArtical.imageUrl,
+                      child: Hero(
+                        tag: newsArtical.imageUrl,
+                        child: FadeInImage(
+                          placeholder:
+                              AssetImage("dev_assets/NewsBucketLogo.png"),
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            newsArtical.imageUrl,
+                          ),
                         ),
                       ),
                     ),
