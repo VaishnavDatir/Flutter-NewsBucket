@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share/share.dart';
+
 import '../widgets/apptitle.dart';
+
+import '../screens/news_view.dart';
+
+import '../widgets/image_not_ava.dart';
 
 import '../models/news_artical_modal.dart' as nam;
 
@@ -24,24 +30,49 @@ class NewsDisplayScreen extends StatelessWidget {
               elevation: 1,
               expandedHeight: 300,
               pinned: true,
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.share),
+                  onPressed: () {
+                    final RenderBox box = context.findRenderObject();
+                    final String appTitle = "NewsBucket\n";
+                    final String msgTitle = "*${ndNewsArtical.title}*";
+                    final String msgDes = ndNewsArtical.description.isEmpty
+                        ? ""
+                        : "\n\n${ndNewsArtical.description}";
+                    final String msgUrl = ndNewsArtical.newsUrl.isEmpty
+                        ? ""
+                        : "\n\nTo know more:\n${ndNewsArtical.newsUrl}";
+                    Share.share(appTitle + msgTitle + msgDes + msgUrl,
+                        subject: msgTitle,
+                        sharePositionOrigin:
+                            box.localToGlobal(Offset.zero) & box.size);
+                  },
+                  tooltip: "Share",
+                )
+              ],
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
-                  margin: const EdgeInsets.only(top: 55),
+                  margin: const EdgeInsets.only(top: 60),
                   padding: const EdgeInsets.symmetric(vertical: 0),
-                  child: Hero(
-                    tag: ndNewsArtical.imageUrl,
-                    child: Image.network(
-                      ndNewsArtical.imageUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  child: ndNewsArtical.imageUrl.isEmpty
+                      ? ImageNotAvaWidget()
+                      : Hero(
+                          tag: ndNewsArtical.title,
+                          child: Image.network(
+                            ndNewsArtical.imageUrl,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
                 ),
               ),
             ),
             SliverToBoxAdapter(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 7),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,21 +81,37 @@ class NewsDisplayScreen extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(right: 5),
                             child: SelectableText(
-                              ndNewsArtical.title,
+                              ndNewsArtical.title.trim(),
                               textAlign: TextAlign.justify,
                               style: GoogleFonts.poppins(
-                                fontSize: 16,
+                                fontSize: 19,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.share),
-                          onPressed: () {},
-                        )
+                          icon: Icon(
+                            Icons.open_in_new,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(NewsView.routeName,
+                                arguments: {"newsUrl": ndNewsArtical.newsUrl});
+                          },
+                          tooltip: "Open in browser",
+                        ),
                       ],
-                    )
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      ndNewsArtical.description,
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20, color: Colors.grey[700]),
+                    ),
                   ],
                 ),
               ),

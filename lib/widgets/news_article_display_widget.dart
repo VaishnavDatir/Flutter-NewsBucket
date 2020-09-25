@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../screens/news_display.dart';
+
+import '../widgets/image_not_ava.dart';
+
 import '../models/news_artical_modal.dart' as nam;
 
 class NewsArticleDisplayWidget extends StatelessWidget {
@@ -39,37 +42,12 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                 bottomLeft: const Radius.circular(1),
               ),
               child: newsArtical.imageUrl.isEmpty
-                  ? Container(
-                      height: 200,
-                      width: double.infinity,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'News',
-                              style: GoogleFonts.ubuntu(
-                                  fontSize: 27, color: Colors.black),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Bucket',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue[900])),
-                              ],
-                            ),
-                          ),
-                          Text("Image Not Availabe",
-                              style: GoogleFonts.ubuntu(
-                                  fontSize: 20, color: Colors.black))
-                        ],
-                      ),
-                    )
+                  ? ImageNotAvaWidget()
                   : Container(
                       height: 200,
                       width: double.infinity,
                       child: Hero(
-                        tag: newsArtical.imageUrl,
+                        tag: newsArtical.title,
                         child: FadeInImage(
                           placeholder:
                               AssetImage("dev_assets/NewsBucketLogo.png"),
@@ -94,7 +72,7 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                   Text(
                     newsArtical.description,
                     style: GoogleFonts.montserrat(
-                        fontSize: 15, color: Colors.grey[700]),
+                        fontSize: 15, color: Colors.grey[900]),
                   ),
                 ],
               ),

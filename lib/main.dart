@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// import 'package:flutter/services.dart'; USED for SystemChrome
 
 import './providers/news_artical_provider.dart';
 import './providers/category_news_artical_provider.dart';
@@ -13,6 +14,11 @@ import './screens/news_display.dart';
 import './helpers/custom_route.dart';
 
 void main() {
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   // statusBarColor: Colors.white,
+  //   statusBarIconBrightness: Brightness.dark,
+  //   // statusBarBrightness: Brightness.light,
+  // ));
   runApp(MyApp());
 }
 

@@ -24,9 +24,10 @@ class _NewsViewState extends State<NewsView> {
     final newsurl = routeArgs["newsUrl"];
     return Scaffold(
       appBar: AppBar(
-          // backgroundColor: Colors.white,
-          // elevation: 0,
-          title: AppTitle()),
+        // backgroundColor: Colors.white,
+        // elevation: 0,
+        title: AppTitle(),
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
