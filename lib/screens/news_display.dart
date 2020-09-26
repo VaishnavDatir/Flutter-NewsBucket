@@ -81,7 +81,7 @@ class NewsDisplayScreen extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(right: 5),
                             child: SelectableText(
-                              ndNewsArtical.title.trim(),
+                              ndNewsArtical.title,
                               textAlign: TextAlign.justify,
                               style: GoogleFonts.poppins(
                                 fontSize: 19,
@@ -95,6 +95,8 @@ class NewsDisplayScreen extends StatelessWidget {
                             Icons.open_in_new,
                             size: 30,
                           ),
+                          color: Colors.blue[900],
+                          splashRadius: 25,
                           onPressed: () {
                             Navigator.of(context).pushNamed(NewsView.routeName,
                                 arguments: {"newsUrl": ndNewsArtical.newsUrl});
@@ -106,11 +108,11 @@ class NewsDisplayScreen extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    SelectableText(
                       ndNewsArtical.description,
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.justify,
                       style: GoogleFonts.montserrat(
-                          fontSize: 20, color: Colors.grey[700]),
+                          fontSize: 20, fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),

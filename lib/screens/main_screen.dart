@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../providers/categoryProvider.dart';
 import '../providers/news_artical_provider.dart';
@@ -11,6 +12,7 @@ import '../widgets/category_title_display.dart';
 import '../widgets/news_article_display_widget.dart';
 import '../widgets/apptitle.dart';
 import '../widgets/loading_screen_widget.dart';
+import '../widgets/news_article_single_row.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -70,26 +72,6 @@ class _MainScreenState extends State<MainScreen> {
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 5),
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        "TOP HEADLINES IN INDIA",
-                        style: GoogleFonts.roboto(
-                            fontSize: 22,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    height: 4,
-                    endIndent: 10,
-                    indent: 10,
-                    color: Colors.blue[900],
-                  ),
                   FutureBuilder(
                       future: Provider.of<NewsArticalProvider>(context,
                               listen: false)
@@ -108,16 +90,56 @@ class _MainScreenState extends State<MainScreen> {
                             return Consumer<NewsArticalProvider>(
                               builder: (ctx, data, child) {
                                 return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ListView.builder(
-                                      itemCount: data.newsarticalpro.length,
-                                      physics: ClampingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemBuilder: (ctx, index) =>
-                                          NewsArticleDisplayWidget(
-                                        newsArtical: data.newsarticalpro[index],
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        "Top headlines in India",
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 22,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
+                                    Divider(
+                                      height: 4,
+                                      endIndent: 10,
+                                      indent: 10,
+                                      color: Colors.blue[900],
+                                    ),
+                                    CarouselSlider(
+                                      items: [
+                                        NewsArticleDisplayWidget(
+                                            newsArtical:
+                                                data.newsarticalpro[0]),
+                                        NewsArticleDisplayWidget(
+                                            newsArtical:
+                                                data.newsarticalpro[1]),
+                                        NewsArticleDisplayWidget(
+                                            newsArtical:
+                                                data.newsarticalpro[2]),
+                                        NewsArticleDisplayWidget(
+                                            newsArtical: data.newsarticalpro[3])
+                                      ],
+                                      options: CarouselOptions(
+                                          autoPlay: true,
+                                          height: 300,
+                                          viewportFraction: 0.9,
+                                          enlargeCenterPage: false,
+                                          enableInfiniteScroll: false),
+                                    ),
+                                    ListView.builder(
+                                        physics: ClampingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            data.newsarticalpro.length - 4,
+                                        itemBuilder: (ctx, index) =>
+                                            NewsArticleSingleRowWidget(
+                                              newsArticalSingleRow: data
+                                                  .newsarticalpro[index + 4],
+                                            )),
                                     Container(
                                       width: double.infinity,
                                       margin: EdgeInsets.symmetric(
