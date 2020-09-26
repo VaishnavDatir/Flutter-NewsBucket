@@ -31,7 +31,7 @@ class NewsArticleDisplayWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        margin: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
         child: Container(
           height: 300,
           child: Column(
@@ -44,15 +44,17 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                   bottomLeft: const Radius.circular(1),
                 ),
                 child: newsArtical.imageUrl.isEmpty
-                    ? ImageNotAvaWidget()
+                    ? ImageNotAvaWidget(
+                        isBig: true,
+                      )
                     : Container(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
                         child: Hero(
                           tag: newsArtical.title,
                           child: FadeInImage(
-                            placeholder:
-                                AssetImage("dev_assets/NewsBucketLogo.png"),
+                            placeholder: const AssetImage(
+                                "dev_assets/NewsBucketLogo.png"),
                             fit: BoxFit.cover,
                             image: NetworkImage(
                               newsArtical.imageUrl,
@@ -63,7 +65,8 @@ class NewsArticleDisplayWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                   child: Text(newsArtical.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,

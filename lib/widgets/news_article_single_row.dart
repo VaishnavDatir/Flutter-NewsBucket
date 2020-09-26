@@ -27,25 +27,25 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          margin: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
           child: Container(
             height: 100,
             child: Row(
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10)),
+                      topLeft: const Radius.circular(10),
+                      bottomLeft: const Radius.circular(10)),
                   child: newsArticalSingleRow.imageUrl.isEmpty
-                      ? ImageNotAvaWidget()
+                      ? ImageNotAvaWidget(isBig: false)
                       : Container(
                           height: 100,
                           width: 125,
                           child: Hero(
                             tag: newsArticalSingleRow.title,
                             child: FadeInImage(
-                              placeholder:
-                                  AssetImage("dev_assets/NewsBucketLogo.png"),
+                              placeholder: const AssetImage(
+                                  "dev_assets/NewsBucketLogo.png"),
                               fit: BoxFit.cover,
                               image: NetworkImage(
                                 newsArticalSingleRow.imageUrl,

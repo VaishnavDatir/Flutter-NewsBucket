@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -13,6 +12,8 @@ import '../widgets/news_article_display_widget.dart';
 import '../widgets/apptitle.dart';
 import '../widgets/loading_screen_widget.dart';
 import '../widgets/news_article_single_row.dart';
+import '../widgets/update_date_time_widget.dart';
+import '../widgets/heading_div_widget.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -90,25 +91,9 @@ class _MainScreenState extends State<MainScreen> {
                             return Consumer<NewsArticalProvider>(
                               builder: (ctx, data, child) {
                                 return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text(
-                                        "Top headlines in India",
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 22,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Divider(
-                                      height: 4,
-                                      endIndent: 10,
-                                      indent: 10,
-                                      color: Colors.blue[900],
-                                    ),
+                                    HeadingAndDivider(
+                                        heading: "Trending in India"),
                                     CarouselSlider(
                                       items: [
                                         NewsArticleDisplayWidget(
@@ -130,6 +115,9 @@ class _MainScreenState extends State<MainScreen> {
                                           enlargeCenterPage: false,
                                           enableInfiniteScroll: false),
                                     ),
+                                    SizedBox(height: 10),
+                                    HeadingAndDivider(
+                                        heading: "Top headlines in India"),
                                     ListView.builder(
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
@@ -140,20 +128,7 @@ class _MainScreenState extends State<MainScreen> {
                                               newsArticalSingleRow: data
                                                   .newsarticalpro[index + 4],
                                             )),
-                                    Container(
-                                      width: double.infinity,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 2, vertical: 5),
-                                      padding: EdgeInsets.all(3),
-                                      child: Text(
-                                          "Updated at ${DateFormat("dd/MM/yyyy hh:mm a").format(dateTime)}",
-                                          textAlign: TextAlign.right,
-                                          style: GoogleFonts.rubik(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.blue[900],
-                                          )),
-                                    ),
+                                    UpdateDateAndTime(dateTime: dateTime),
                                   ],
                                 );
                               },
@@ -320,8 +295,9 @@ class QuerySearch extends StatelessWidget {
                         itemCount: data.customSearchNewsPro.length,
                         physics: ClampingScrollPhysics(),
                         shrinkWrap: true,
-                        itemBuilder: (ctx, index) => NewsArticleDisplayWidget(
-                              newsArtical: data.customSearchNewsPro[index],
+                        itemBuilder: (ctx, index) => NewsArticleSingleRowWidget(
+                              newsArticalSingleRow:
+                                  data.customSearchNewsPro[index],
                             ));
               });
             }

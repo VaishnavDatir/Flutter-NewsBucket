@@ -56,7 +56,9 @@ class NewsDisplayScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 60),
                   padding: const EdgeInsets.symmetric(vertical: 0),
                   child: ndNewsArtical.imageUrl.isEmpty
-                      ? ImageNotAvaWidget()
+                      ? ImageNotAvaWidget(
+                          isBig: true,
+                        )
                       : Hero(
                           tag: ndNewsArtical.title,
                           child: Image.network(
