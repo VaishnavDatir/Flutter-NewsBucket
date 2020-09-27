@@ -14,6 +14,7 @@ import '../widgets/loading_screen_widget.dart';
 import '../widgets/news_article_single_row.dart';
 import '../widgets/update_date_time_widget.dart';
 import '../widgets/heading_div_widget.dart';
+import '../widgets/appdrawer.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -26,124 +27,131 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: AppDrawer(),
         body: RefreshIndicator(
-      onRefresh: () {
-        setState(() {
-          dateTime = DateTime.now();
-        });
+          onRefresh: () {
+            setState(() {
+              dateTime = DateTime.now();
+            });
 
-        return Provider.of<NewsArticalProvider>(context, listen: false)
-            .fetchTopHeadlines();
-      },
-      child: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              elevation: 1,
+            return Provider.of<NewsArticalProvider>(context, listen: false)
+                .fetchTopHeadlines();
+          },
+          child: SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  elevation: 1,
 
-              expandedHeight: 155,
-              pinned: true,
-              // snap: true,
-              // floating: true,
-              title: AppTitle(),
-              actions: [
-                IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      showSearch(context: context, delegate: DataSearch());
-                    }),
-              ],
-              flexibleSpace: FlexibleSpaceBar(
-                background: Container(
-                  margin: const EdgeInsets.only(top: 55),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
-                  height: 90,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(6)),
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: Categories_Data.length,
-                        itemBuilder: (ctx, index) => CategoryTitleDisplayWidget(
-                            cTitle: Categories_Data[index].categoryTitle,
-                            cImgUrl: Categories_Data[index].categoryImgUrl)),
+                  expandedHeight: 155,
+                  pinned: true,
+                  // snap: true,
+                  // floating: true,
+                  title: AppTitle(),
+                  actions: [
+                    IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          showSearch(context: context, delegate: DataSearch());
+                        }),
+                  ],
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Container(
+                      margin: const EdgeInsets.only(top: 55),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 0),
+                      height: 90,
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(6)),
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: Categories_Data.length,
+                            itemBuilder: (ctx, index) =>
+                                CategoryTitleDisplayWidget(
+                                    cTitle:
+                                        Categories_Data[index].categoryTitle,
+                                    cImgUrl:
+                                        Categories_Data[index].categoryImgUrl)),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  FutureBuilder(
-                      future: Provider.of<NewsArticalProvider>(context,
-                              listen: false)
-                          .fetchTopHeadlines(),
-                      builder: (ctx, dataSnapShot) {
-                        if (dataSnapShot.connectionState ==
-                            ConnectionState.waiting) {
-                          return LoadingScreenWidget();
-                        } else {
-                          if (dataSnapShot.error != null) {
-                            //Do Error handling stuff
-                            return Center(
-                                child: const Text(
-                                    "Error While Fetching Data\n Check Network Connection"));
-                          } else {
-                            return Consumer<NewsArticalProvider>(
-                              builder: (ctx, data, child) {
-                                return Column(
-                                  children: [
-                                    HeadingAndDivider(
-                                        heading: "Trending in India"),
-                                    CarouselSlider(
-                                      items: [
-                                        NewsArticleDisplayWidget(
-                                            newsArtical:
-                                                data.newsarticalpro[0]),
-                                        NewsArticleDisplayWidget(
-                                            newsArtical:
-                                                data.newsarticalpro[1]),
-                                        NewsArticleDisplayWidget(
-                                            newsArtical:
-                                                data.newsarticalpro[2]),
-                                        NewsArticleDisplayWidget(
-                                            newsArtical: data.newsarticalpro[3])
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      FutureBuilder(
+                          future: Provider.of<NewsArticalProvider>(context,
+                                  listen: false)
+                              .fetchTopHeadlines(),
+                          builder: (ctx, dataSnapShot) {
+                            if (dataSnapShot.connectionState ==
+                                ConnectionState.waiting) {
+                              return LoadingScreenWidget();
+                            } else {
+                              if (dataSnapShot.error != null) {
+                                //Do Error handling stuff
+                                return Center(
+                                    child: const Text(
+                                        "Error While Fetching Data\n Check Network Connection"));
+                              } else {
+                                return Consumer<NewsArticalProvider>(
+                                  builder: (ctx, data, child) {
+                                    return Column(
+                                      children: [
+                                        HeadingAndDivider(
+                                            heading: "Trending in India"),
+                                        CarouselSlider(
+                                          items: [
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[0]),
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[1]),
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[2]),
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[3])
+                                          ],
+                                          options: CarouselOptions(
+                                              autoPlay: true,
+                                              height: 300,
+                                              viewportFraction: 0.9,
+                                              enlargeCenterPage: false,
+                                              enableInfiniteScroll: false),
+                                        ),
+                                        SizedBox(height: 10),
+                                        HeadingAndDivider(
+                                            heading: "Top headlines in India"),
+                                        ListView.builder(
+                                            physics: ClampingScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount:
+                                                data.newsarticalpro.length - 4,
+                                            itemBuilder: (ctx, index) =>
+                                                NewsArticleSingleRowWidget(
+                                                  newsArticalSingleRow:
+                                                      data.newsarticalpro[
+                                                          index + 4],
+                                                )),
+                                        UpdateDateAndTime(dateTime: dateTime),
                                       ],
-                                      options: CarouselOptions(
-                                          autoPlay: true,
-                                          height: 300,
-                                          viewportFraction: 0.9,
-                                          enlargeCenterPage: false,
-                                          enableInfiniteScroll: false),
-                                    ),
-                                    SizedBox(height: 10),
-                                    HeadingAndDivider(
-                                        heading: "Top headlines in India"),
-                                    ListView.builder(
-                                        physics: ClampingScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount:
-                                            data.newsarticalpro.length - 4,
-                                        itemBuilder: (ctx, index) =>
-                                            NewsArticleSingleRowWidget(
-                                              newsArticalSingleRow: data
-                                                  .newsarticalpro[index + 4],
-                                            )),
-                                    UpdateDateAndTime(dateTime: dateTime),
-                                  ],
+                                    );
+                                  },
                                 );
-                              },
-                            );
-                          }
-                        }
-                      }),
-                ],
-              ),
+                              }
+                            }
+                          }),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }
 

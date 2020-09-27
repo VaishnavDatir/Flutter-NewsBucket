@@ -18,7 +18,7 @@ class HeadingAndDivider extends StatelessWidget {
               "$heading",
               style: GoogleFonts.roboto(
                   fontSize: 22,
-                  color: Colors.black,
+                  // color: Colors.black,
                   fontWeight: FontWeight.w600),
             ),
           ),

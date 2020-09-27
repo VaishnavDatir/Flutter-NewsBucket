@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'News Bucket',
         theme: ThemeData(
+            // brightness: Brightness.dark,
             primarySwatch: Colors.indigo,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             appBarTheme: ThemeData.light().appBarTheme.copyWith(
