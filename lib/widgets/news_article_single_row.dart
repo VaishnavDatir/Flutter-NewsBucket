@@ -12,22 +12,23 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
   NewsArticleSingleRowWidget({this.newsArticalSingleRow});
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => NewsDisplayScreen(
-              ndNewsArtical: newsArticalSingleRow,
-            ),
-          ),
-        );
-      },
-      child: Card(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+    return Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10.0),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => NewsDisplayScreen(
+                  ndNewsArtical: newsArticalSingleRow,
+                ),
+              ),
+            );
+          },
           child: Container(
             height: 100,
             child: Row(
@@ -69,7 +70,7 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                         textAlign: TextAlign.justify,
                         style: GoogleFonts.poppins(
                             fontSize: 14,
-                            color: Colors.black,
+                            // color: Colors.black,
                             fontWeight: FontWeight.w600),
                       ),
                       Align(
@@ -86,7 +87,7 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                 ))
               ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

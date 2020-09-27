@@ -1,6 +1,10 @@
+import 'package:NewsBucket/helpers/themehelper.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {
+  final bool darkThemeEnabled;
+
+  AppDrawer({this.darkThemeEnabled});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -12,11 +16,21 @@ class AppDrawer extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           ListTile(
-            leading: Icon(Icons.brightness_high),
-            title: Text("Dark Mode"),
-            trailing: Switch(value: true, onChanged: null),
+            leading: const Icon(Icons.brightness_high),
+            title: const Text(
+              "Dark Mode",
+              style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.5),
+            ),
+            trailing: Switch(
+              value: darkThemeEnabled,
+              onChanged: bloc.changeTheme,
+              activeColor: Colors.blue[700],
+            ),
           ),
-          Divider(),
+          const Divider(),
           InkWell(
             onTap: () {
               showAboutDialog(
@@ -24,19 +38,31 @@ class AppDrawer extends StatelessWidget {
                 applicationVersion: "v1.5 Android",
               );
             },
-            child: ListTile(
-              leading: Icon(Icons.info),
-              title: Text("About App"),
+            child: const ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text(
+                "About App",
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.5),
+              ),
             ),
           ),
-          Divider(),
+          const Divider(),
           InkWell(
             onTap: () {},
-            child: ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text("Feedback"),
+            child: const ListTile(
+              leading: const Icon(Icons.feedback),
+              title: const Text(
+                "Feedback",
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.5),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

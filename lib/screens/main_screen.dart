@@ -17,6 +17,10 @@ import '../widgets/heading_div_widget.dart';
 import '../widgets/appdrawer.dart';
 
 class MainScreen extends StatefulWidget {
+  final bool darkThemeEnabled;
+
+  MainScreen({this.darkThemeEnabled});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -27,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: AppDrawer(),
+        drawer: AppDrawer(darkThemeEnabled: widget.darkThemeEnabled),
         body: RefreshIndicator(
           onRefresh: () {
             setState(() {
@@ -43,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
                 SliverAppBar(
                   elevation: 1,
 
-                  expandedHeight: 155,
+                  expandedHeight: 135,
                   pinned: true,
                   // snap: true,
                   // floating: true,
@@ -57,16 +61,15 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     background: Container(
-                      margin: const EdgeInsets.only(top: 55),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 0),
-                      height: 90,
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(6)),
+                      margin:
+                          const EdgeInsets.only(top: 55, right: 5, bottom: 3),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      // height: 41,
+                      child: Center(
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: Categories_Data.length,
+                            shrinkWrap: true,
                             itemBuilder: (ctx, index) =>
                                 CategoryTitleDisplayWidget(
                                     cTitle:
@@ -99,6 +102,7 @@ class _MainScreenState extends State<MainScreen> {
                                   builder: (ctx, data, child) {
                                     return Column(
                                       children: [
+                                        SizedBox(height: 10),
                                         HeadingAndDivider(
                                             heading: "Trending in India"),
                                         CarouselSlider(

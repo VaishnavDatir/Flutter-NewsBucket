@@ -11,7 +11,11 @@ class AppTitle extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: 'News',
-        style: GoogleFonts.ubuntu(fontSize: 27, color: Colors.black),
+        style: GoogleFonts.ubuntu(
+          fontSize: 27,
+          // fontWeight: FontWeight.w400,
+          color: Colors.orange[900],
+        ),
         children: <TextSpan>[
           TextSpan(
               text: 'Bucket',

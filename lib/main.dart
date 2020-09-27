@@ -11,7 +11,7 @@ import './screens/news_view.dart';
 import './screens/category_news_screen.dart';
 import './screens/news_display.dart';
 
-import './helpers/custom_route.dart';
+import './helpers/themehelper.dart';
 
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -37,29 +37,25 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (ctx) => CustomSearchNewsArticalsProviders())
       ],
-      child: MaterialApp(
-        title: 'News Bucket',
-        theme: ThemeData(
-            // brightness: Brightness.dark,
-            primarySwatch: Colors.indigo,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            appBarTheme: ThemeData.light().appBarTheme.copyWith(
-                color: Colors.white,
-                centerTitle: true,
-                elevation: 0,
-                iconTheme: ThemeData.light()
-                    .iconTheme
-                    .copyWith(color: Colors.blue[900])),
-            pageTransitionsTheme: PageTransitionsTheme(builders: {
-              TargetPlatform.android: CustomPageTransitionBuilder()
-            })),
-        home: MainScreen(),
-        routes: {
-          NewsView.routeName: (ctx) => NewsView(),
-          CategoryNews.routeName: (ctx) => CategoryNews(),
-          NewsDisplayScreen.routeName: (ctx) => NewsDisplayScreen(),
-        },
-      ),
+      child: StreamBuilder(
+          stream: bloc.darkThemeEnabled,
+          initialData: false,
+          builder: (context, snapshot) {
+            return MaterialApp(
+              title: 'News Bucket',
+              themeMode: snapshot.data ? ThemeMode.dark : ThemeMode.light,
+              darkTheme: AppTheme().darkTheme,
+              theme: AppTheme().lightTheme,
+              home: MainScreen(
+                darkThemeEnabled: snapshot.data,
+              ),
+              routes: {
+                NewsView.routeName: (ctx) => NewsView(),
+                CategoryNews.routeName: (ctx) => CategoryNews(),
+                NewsDisplayScreen.routeName: (ctx) => NewsDisplayScreen(),
+              },
+            );
+          }),
     );
   }
 }

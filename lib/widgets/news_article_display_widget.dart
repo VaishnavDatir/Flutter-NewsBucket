@@ -13,25 +13,23 @@ class NewsArticleDisplayWidget extends StatelessWidget {
   NewsArticleDisplayWidget({this.newsArtical});
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        /*  Navigator.of(context).pushNamed(NewsView.routeName,
-            arguments: {"newsUrl": newsArtical.newsUrl}); */ //To OPEN WEBSITE
-        // print(newsArtical.newsUrl.toString());
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => NewsDisplayScreen(
-              ndNewsArtical: newsArtical,
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10.0),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => NewsDisplayScreen(
+                ndNewsArtical: newsArtical,
+              ),
             ),
-          ),
-        );
-      },
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+          );
+        },
         child: Container(
           height: 300,
           child: Column(
@@ -72,7 +70,7 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                       maxLines: 3,
                       style: GoogleFonts.poppins(
                           fontSize: 16,
-                          color: Colors.black,
+                          // color: Colors.black,
                           fontWeight: FontWeight.w600)),
                 ),
               )
