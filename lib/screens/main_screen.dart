@@ -40,7 +40,8 @@ class _MainScreenState extends State<MainScreen> {
           slivers: [
             SliverAppBar(
               elevation: 1,
-              expandedHeight: 150,
+
+              expandedHeight: 155,
               pinned: true,
               // snap: true,
               // floating: true,
@@ -54,10 +55,10 @@ class _MainScreenState extends State<MainScreen> {
               ],
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
-                  margin: const EdgeInsets.only(top: 60),
+                  margin: const EdgeInsets.only(top: 55),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
-                  height: 80,
+                  height: 90,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(6)),
                     child: ListView.builder(

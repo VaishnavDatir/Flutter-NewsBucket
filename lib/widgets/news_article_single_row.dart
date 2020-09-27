@@ -59,6 +59,7 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         newsArticalSingleRow.title,
@@ -67,7 +68,7 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                         maxLines: 3,
                         textAlign: TextAlign.justify,
                         style: GoogleFonts.poppins(
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Colors.black,
                             fontWeight: FontWeight.w600),
                       ),

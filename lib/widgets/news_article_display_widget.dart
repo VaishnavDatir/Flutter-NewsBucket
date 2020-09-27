@@ -71,7 +71,7 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       style: GoogleFonts.poppins(
-                          fontSize: 17,
+                          fontSize: 16,
                           color: Colors.black,
                           fontWeight: FontWeight.w600)),
                 ),
