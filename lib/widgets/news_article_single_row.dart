@@ -79,7 +79,7 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                           "Know More >",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: Colors.blue[900]),
+                              color: Colors.blue[800]),
                         ),
                       )
                     ],

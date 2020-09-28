@@ -20,7 +20,7 @@ class AppTitle extends StatelessWidget {
           TextSpan(
               text: 'Bucket',
               style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.blue[900])),
+                  fontWeight: FontWeight.bold, color: Colors.blue[800])),
         ],
       ),
     );

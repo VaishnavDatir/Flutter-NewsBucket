@@ -26,7 +26,6 @@ class HeadingAndDivider extends StatelessWidget {
             height: 4,
             endIndent: 10,
             indent: 10,
-            color: Colors.blue[900],
           ),
         ],
       ),

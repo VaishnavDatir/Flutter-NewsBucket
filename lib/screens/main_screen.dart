@@ -15,6 +15,7 @@ import '../widgets/news_article_single_row.dart';
 import '../widgets/update_date_time_widget.dart';
 import '../widgets/heading_div_widget.dart';
 import '../widgets/appdrawer.dart';
+import '../widgets/connectivity_error.dart';
 
 class MainScreen extends StatefulWidget {
   final bool darkThemeEnabled;
@@ -49,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
 
                   expandedHeight: 135,
                   pinned: true,
-                  // snap: true,
+                  //  snap: true,
                   // floating: true,
                   title: AppTitle(),
                   actions: [
@@ -100,50 +101,57 @@ class _MainScreenState extends State<MainScreen> {
                               } else {
                                 return Consumer<NewsArticalProvider>(
                                   builder: (ctx, data, child) {
-                                    return Column(
-                                      children: [
-                                        SizedBox(height: 10),
-                                        HeadingAndDivider(
-                                            heading: "Trending in India"),
-                                        CarouselSlider(
-                                          items: [
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[0]),
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[1]),
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[2]),
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[3])
-                                          ],
-                                          options: CarouselOptions(
-                                              autoPlay: true,
-                                              height: 300,
-                                              viewportFraction: 0.9,
-                                              enlargeCenterPage: false,
-                                              enableInfiniteScroll: false),
-                                        ),
-                                        SizedBox(height: 10),
-                                        HeadingAndDivider(
-                                            heading: "Top headlines in India"),
-                                        ListView.builder(
-                                            physics: ClampingScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount:
-                                                data.newsarticalpro.length - 4,
-                                            itemBuilder: (ctx, index) =>
-                                                NewsArticleSingleRowWidget(
-                                                  newsArticalSingleRow:
-                                                      data.newsarticalpro[
-                                                          index + 4],
-                                                )),
-                                        UpdateDateAndTime(dateTime: dateTime),
-                                      ],
-                                    );
+                                    return data.newsarticalpro.isEmpty
+                                        ? ConnectivityError()
+                                        : Column(
+                                            children: [
+                                              SizedBox(height: 10),
+                                              HeadingAndDivider(
+                                                  heading: "Trending in India"),
+                                              CarouselSlider(
+                                                items: [
+                                                  NewsArticleDisplayWidget(
+                                                      newsArtical: data
+                                                          .newsarticalpro[0]),
+                                                  NewsArticleDisplayWidget(
+                                                      newsArtical: data
+                                                          .newsarticalpro[1]),
+                                                  NewsArticleDisplayWidget(
+                                                      newsArtical: data
+                                                          .newsarticalpro[2]),
+                                                  NewsArticleDisplayWidget(
+                                                      newsArtical: data
+                                                          .newsarticalpro[3])
+                                                ],
+                                                options: CarouselOptions(
+                                                    autoPlay: true,
+                                                    height: 300,
+                                                    viewportFraction: 0.9,
+                                                    enlargeCenterPage: false,
+                                                    enableInfiniteScroll:
+                                                        false),
+                                              ),
+                                              SizedBox(height: 10),
+                                              HeadingAndDivider(
+                                                  heading:
+                                                      "Top headlines in India"),
+                                              ListView.builder(
+                                                  physics:
+                                                      ClampingScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: data.newsarticalpro
+                                                          .length -
+                                                      4,
+                                                  itemBuilder: (ctx, index) =>
+                                                      NewsArticleSingleRowWidget(
+                                                        newsArticalSingleRow:
+                                                            data.newsarticalpro[
+                                                                index + 4],
+                                                      )),
+                                              UpdateDateAndTime(
+                                                  dateTime: dateTime),
+                                            ],
+                                          );
                                   },
                                 );
                               }
@@ -198,7 +206,9 @@ class DataSearch extends SearchDelegate<String> {
         .pushNamed(CustomSearchNewsScreen.routeName, arguments: {
       "searchQuery": query,
     }); */
-    return QuerySearch(query: query);
+    return query.isEmpty
+        ? buildSuggestions(context)
+        : QuerySearch(query: query);
   }
 
   @override
