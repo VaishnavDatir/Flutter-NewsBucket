@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../providers/categoryProvider.dart';
@@ -16,6 +15,8 @@ import '../widgets/update_date_time_widget.dart';
 import '../widgets/heading_div_widget.dart';
 import '../widgets/appdrawer.dart';
 import '../widgets/connectivity_error.dart';
+
+import 'package:NewsBucket/mconstants.dart';
 
 class MainScreen extends StatefulWidget {
   final bool darkThemeEnabled;
@@ -55,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
                   title: AppTitle(),
                   actions: [
                     IconButton(
-                        icon: Icon(Icons.search),
+                        icon: const Icon(Icons.search),
                         onPressed: () {
                           showSearch(context: context, delegate: DataSearch());
                         }),
@@ -174,7 +175,7 @@ class DataSearch extends SearchDelegate<String> {
     //throw UnimplementedError();
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = "";
         },
@@ -231,7 +232,7 @@ class DataSearch extends SearchDelegate<String> {
         children: [
           FittedBox(
             fit: BoxFit.scaleDown,
-            child: Icon(
+            child: const Icon(
               Icons.search,
               size: 70,
             ),
@@ -243,7 +244,7 @@ class DataSearch extends SearchDelegate<String> {
               fit: BoxFit.scaleDown,
               child: Text(
                 "Search your topic",
-                style: GoogleFonts.poppins(fontSize: 24),
+                style: MConstant.fontPoppins(24, null),
               ))
         ],
       ),
@@ -297,7 +298,7 @@ class QuerySearch extends StatelessWidget {
                           children: [
                             FittedBox(
                               fit: BoxFit.scaleDown,
-                              child: Icon(
+                              child: const Icon(
                                 Icons.error_outline,
                                 size: 70,
                               ),
@@ -309,7 +310,7 @@ class QuerySearch extends StatelessWidget {
                                 fit: BoxFit.scaleDown,
                                 child: Text(
                                   "Nothing found related to \n'$query'",
-                                  style: GoogleFonts.poppins(fontSize: 24),
+                                  style: MConstant.fontPoppins(24, null),
                                 ))
                           ],
                         ),
