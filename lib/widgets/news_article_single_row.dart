@@ -1,5 +1,5 @@
-import 'package:NewsBucket/mconstants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../screens/news_display.dart';
 import '../widgets/image_not_ava.dart';
@@ -68,7 +68,10 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                         textAlign: TextAlign.justify,
-                        style: MConstant.fontPoppins(14, FontWeight.w600),
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            // color: Colors.black,
+                            fontWeight: FontWeight.w600),
                       ),
                       Align(
                         alignment: Alignment.centerRight,

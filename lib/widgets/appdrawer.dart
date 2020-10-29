@@ -21,7 +21,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.brightness_high),
             title: const Text(
               "Dark Mode",
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.5),
@@ -53,7 +53,7 @@ class AppDrawer extends StatelessWidget {
                                 const SizedBox(height: 7),
                                 const Text(
                                   "NewsBucket is a news app that selects latest and best news from national sources and summarises them to present in a short and less format.",
-                                  style: const TextStyle(fontSize: 17),
+                                  style: TextStyle(fontSize: 17),
                                 )
                               ],
                             ),
@@ -62,9 +62,9 @@ class AppDrawer extends StatelessWidget {
                         actions: [
                           FlatButton(
                               onPressed: () => Navigator.of(context).pop(),
-                              child: const Text(
+                              child: Text(
                                 "Ok",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Colors.orange, fontSize: 16),
                               ))
                         ],
@@ -75,7 +75,7 @@ class AppDrawer extends StatelessWidget {
               leading: const Icon(Icons.info),
               title: const Text(
                 "About App",
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.5),

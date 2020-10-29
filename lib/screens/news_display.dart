@@ -1,5 +1,5 @@
-import 'package:NewsBucket/mconstants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 
 import '../widgets/apptitle.dart';
@@ -85,7 +85,10 @@ class NewsDisplayScreen extends StatelessWidget {
                             child: SelectableText(
                               ndNewsArtical.title,
                               textAlign: TextAlign.justify,
-                              style: MConstant.fontPoppins(19, FontWeight.w500),
+                              style: GoogleFonts.poppins(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
@@ -110,7 +113,8 @@ class NewsDisplayScreen extends StatelessWidget {
                     SelectableText(
                       ndNewsArtical.description,
                       textAlign: TextAlign.justify,
-                      style: MConstant.fontMontserrat20w400,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20, fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),

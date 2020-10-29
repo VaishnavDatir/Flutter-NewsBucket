@@ -1,5 +1,5 @@
-import 'package:NewsBucket/mconstants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HeadingAndDivider extends StatelessWidget {
   final String heading;
@@ -16,10 +16,13 @@ class HeadingAndDivider extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               "$heading",
-              style: MConstant.fontRoboto22,
+              style: GoogleFonts.roboto(
+                  fontSize: 22,
+                  // color: Colors.black,
+                  fontWeight: FontWeight.w600),
             ),
           ),
-          const Divider(
+          Divider(
             height: 4,
             endIndent: 10,
             indent: 10,
