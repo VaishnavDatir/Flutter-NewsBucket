@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'package:NewsBucket/mconstants.dart';
 
 class AppTitle extends StatelessWidget {
   const AppTitle({
@@ -11,11 +12,7 @@ class AppTitle extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: 'News',
-        style: GoogleFonts.ubuntu(
-          fontSize: 27,
-          // fontWeight: FontWeight.w400,
-          color: Colors.orange[900],
-        ),
+        style: MConstant.fontUbuntu27Orange,
         children: <TextSpan>[
           TextSpan(
               text: 'Bucket',
