@@ -4,20 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 class MConstant {
   static const mAPIKey = "186a96a01cdd4e88b16ad04df6be8e33";
 
-  // static final fontPoppins14 = GoogleFonts.poppins(
-  //     fontSize: 14,
-  //     // color: Colors.black,
-  //     fontWeight: FontWeight.w600);
-
-  // static final fontPoppins16 = GoogleFonts.poppins(
-  //     fontSize: 16,
-  //     // color: Colors.black,
-  //     fontWeight: FontWeight.w600);
-
-  // static final fontPoppins24 = GoogleFonts.poppins(fontSize: 24);
-
-  // static final fontPoppins19w500 =
-  //     GoogleFonts.poppins(fontSize: 19, fontWeight: FontWeight.w600);
 
   static final fontMontserrat20w400 =
       GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.w400);
