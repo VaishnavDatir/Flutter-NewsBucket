@@ -17,6 +17,8 @@ import '../widgets/heading_div_widget.dart';
 import '../widgets/appdrawer.dart';
 import '../widgets/connectivity_error.dart';
 
+import '../animation/slide_animation_widget.dart';
+
 class MainScreen extends StatefulWidget {
   final bool darkThemeEnabled;
 
@@ -27,6 +29,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  GlobalKey<ScaffoldState> _scafoldKey = new GlobalKey();
   DateTime dateTime = DateTime.now();
 
   @override
@@ -34,20 +37,25 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         drawer: AppDrawer(darkThemeEnabled: widget.darkThemeEnabled),
         body: RefreshIndicator(
-          onRefresh: () {
+          onRefresh: () async {
             setState(() {
               dateTime = DateTime.now();
             });
 
-            return Provider.of<NewsArticalProvider>(context, listen: false)
+            await Provider.of<NewsArticalProvider>(context, listen: false)
                 .fetchTopHeadlines();
+            return _scafoldKey.currentState.showSnackBar(SnackBar(
+              content: Text("Your viewing latest news"),
+              duration: Duration(seconds: 2),
+              elevation: 6.0,
+              behavior: SnackBarBehavior.floating,
+            ));
           },
           child: SafeArea(
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
                   elevation: 1,
-
                   expandedHeight: 135,
                   pinned: true,
                   //  snap: true,
@@ -62,9 +70,8 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     background: Container(
-                      margin:
-                          const EdgeInsets.only(top: 55, right: 5, bottom: 3),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      margin: const EdgeInsets.only(top: 55, bottom: 3),
+                      // padding: const EdgeInsets.symmetric(horizontal: 5),
                       // height: 41,
                       child: Center(
                         child: ListView.builder(
@@ -101,57 +108,81 @@ class _MainScreenState extends State<MainScreen> {
                               } else {
                                 return Consumer<NewsArticalProvider>(
                                   builder: (ctx, data, child) {
-                                    return data.newsarticalpro.isEmpty
-                                        ? ConnectivityError()
-                                        : Column(
-                                            children: [
-                                              SizedBox(height: 10),
-                                              HeadingAndDivider(
-                                                  heading: "Trending in India"),
-                                              CarouselSlider(
-                                                items: [
-                                                  NewsArticleDisplayWidget(
-                                                      newsArtical: data
-                                                          .newsarticalpro[0]),
-                                                  NewsArticleDisplayWidget(
-                                                      newsArtical: data
-                                                          .newsarticalpro[1]),
-                                                  NewsArticleDisplayWidget(
-                                                      newsArtical: data
-                                                          .newsarticalpro[2]),
-                                                  NewsArticleDisplayWidget(
-                                                      newsArtical: data
-                                                          .newsarticalpro[3])
-                                                ],
-                                                options: CarouselOptions(
-                                                    autoPlay: true,
-                                                    height: 300,
-                                                    viewportFraction: 0.9,
-                                                    enlargeCenterPage: false,
-                                                    enableInfiniteScroll:
-                                                        false),
-                                              ),
-                                              SizedBox(height: 10),
-                                              HeadingAndDivider(
-                                                  heading:
-                                                      "Top headlines in India"),
-                                              ListView.builder(
-                                                  physics:
-                                                      ClampingScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: data.newsarticalpro
-                                                          .length -
-                                                      4,
-                                                  itemBuilder: (ctx, index) =>
+                                    if (data.newsarticalpro.isEmpty) {
+                                      return ConnectivityError();
+                                    } else {
+                                      final List _widgets = [
+                                        SizedBox(height: 10),
+                                        HeadingAndDivider(
+                                            heading: "Trending in India"),
+                                        CarouselSlider(
+                                          items: [
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[0]),
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[1]),
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[2]),
+                                            NewsArticleDisplayWidget(
+                                                newsArtical:
+                                                    data.newsarticalpro[3])
+                                          ],
+                                          options: CarouselOptions(
+                                              autoPlay: true,
+                                              height: 300,
+                                              viewportFraction: 0.9,
+                                              enlargeCenterPage: false,
+                                              enableInfiniteScroll: false),
+                                        ),
+                                        SizedBox(height: 10),
+                                        HeadingAndDivider(
+                                            heading: "Top headlines in India"),
+                                        ListView.builder(
+                                            physics: ClampingScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount:
+                                                data.newsarticalpro.length - 4,
+                                            /*  itemBuilder: (ctx, index) =>
                                                       NewsArticleSingleRowWidget(
                                                         newsArticalSingleRow:
                                                             data.newsarticalpro[
                                                                 index + 4],
-                                                      )),
-                                              UpdateDateAndTime(
-                                                  dateTime: dateTime),
-                                            ],
-                                          );
+                                                      ) */
+                                            itemBuilder: (ctx, index) =>
+                                                SlideAnimationWidget(
+                                                  index: index,
+                                                  itemCount: data.newsarticalpro
+                                                          .length -
+                                                      4,
+                                                  widgetToAnimate:
+                                                      NewsArticleSingleRowWidget(
+                                                    newsArticalSingleRow:
+                                                        data.newsarticalpro[
+                                                            index + 4],
+                                                  ),
+                                                )),
+                                        UpdateDateAndTime(dateTime: dateTime),
+                                      ];
+                                      return ListView.builder(
+                                        physics: ClampingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: _widgets.length,
+                                        itemBuilder: (context, index) =>
+                                            SlideAnimationWidget(
+                                          index: index,
+                                          itemCount: _widgets.length,
+                                          widgetToAnimate: _widgets[index],
+                                        ),
+                                      );
+                                    }
+                                    /* Column(
+                                            children: [
+                                              
+                                            ], 
+                                          );*/
                                   },
                                 );
                               }
@@ -267,16 +298,7 @@ class QuerySearch extends StatelessWidget {
             .fetchCustomSearchNews(query),
         builder: (ctx, dataSnapShot) {
           if (dataSnapShot.connectionState == ConnectionState.waiting) {
-            return Container(
-              height: MediaQuery.of(context).size.height,
-              width: double.infinity,
-              child: Center(
-                child: SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: CircularProgressIndicator()),
-              ),
-            );
+            return LoadingScreenWidget();
           } else {
             if (dataSnapShot.error != null) {
               //Do Error handling stuff

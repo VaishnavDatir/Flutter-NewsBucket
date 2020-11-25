@@ -11,7 +11,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 10,
-      child: ListView(
+      child: Column(
         children: [
           Image.asset(
             "dev_assets/NewsBucketLogo.png",
@@ -49,7 +49,7 @@ class AppDrawer extends StatelessWidget {
                             child: Column(
                               children: [
                                 const AppTitle(),
-                                const Text("v1.5 Android"),
+                                const Text("v1.7 Android"),
                                 const SizedBox(height: 7),
                                 const Text(
                                   "NewsBucket is a news app that selects latest and best news from national sources and summarises them to present in a short and less format.",
