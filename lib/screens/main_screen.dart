@@ -35,6 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scafoldKey,
         drawer: AppDrawer(darkThemeEnabled: widget.darkThemeEnabled),
         body: RefreshIndicator(
           onRefresh: () async {
@@ -111,7 +112,7 @@ class _MainScreenState extends State<MainScreen> {
                                     if (data.newsarticalpro.isEmpty) {
                                       return ConnectivityError();
                                     } else {
-                                      final List _widgets = [
+                                      final List _mainScreenWidgets = [
                                         SizedBox(height: 10),
                                         HeadingAndDivider(
                                             heading: "Trending in India"),
@@ -169,12 +170,13 @@ class _MainScreenState extends State<MainScreen> {
                                       return ListView.builder(
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: _widgets.length,
+                                        itemCount: _mainScreenWidgets.length,
                                         itemBuilder: (context, index) =>
                                             SlideAnimationWidget(
                                           index: index,
-                                          itemCount: _widgets.length,
-                                          widgetToAnimate: _widgets[index],
+                                          itemCount: _mainScreenWidgets.length,
+                                          widgetToAnimate:
+                                              _mainScreenWidgets[index],
                                         ),
                                       );
                                     }
@@ -340,10 +342,15 @@ class QuerySearch extends StatelessWidget {
                         itemCount: data.customSearchNewsPro.length,
                         physics: ClampingScrollPhysics(),
                         shrinkWrap: true,
-                        itemBuilder: (ctx, index) => NewsArticleSingleRowWidget(
-                              newsArticalSingleRow:
-                                  data.customSearchNewsPro[index],
-                            ));
+                        itemBuilder: (ctx, index) => SlideAnimationWidget(
+                          index: index,
+                          itemCount: data.customSearchNewsPro.length,
+                          widgetToAnimate: NewsArticleSingleRowWidget(
+                            newsArticalSingleRow:
+                                data.customSearchNewsPro[index],
+                          ),
+                        ),
+                      );
               });
             }
           }

@@ -67,7 +67,6 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
-                        textAlign: TextAlign.justify,
                         style: GoogleFonts.poppins(
                             fontSize: 14,
                             // color: Colors.black,
