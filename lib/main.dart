@@ -9,8 +9,23 @@ import './screens/category_news_screen.dart';
 import './screens/news_display.dart';
 
 import './helpers/themehelper.dart';
+import './helpers/user_preferences.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserPreferences().init();
+  final bool tf = UserPreferences().data ?? false;
+
+  if (tf) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.black,
+        systemNavigationBarIconBrightness: Brightness.light));
+  } else {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark));
+  }
   runApp(MyApp());
 }
 
@@ -22,7 +37,7 @@ class MyApp extends StatelessWidget {
       create: (context) => NewsArticalProvider(),
       child: StreamBuilder(
           stream: bloc.darkThemeEnabled,
-          initialData: false,
+          initialData: UserPreferences().data ?? false,
           builder: (context, snapshot) {
             return MaterialApp(
               title: 'News Bucket',

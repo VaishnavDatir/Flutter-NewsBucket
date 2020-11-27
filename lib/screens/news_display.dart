@@ -19,9 +19,6 @@ class NewsDisplayScreen extends StatelessWidget {
   NewsDisplayScreen({this.ndNewsArtical});
   @override
   Widget build(BuildContext context) {
-    // final routeArgs =
-    //     ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
-    // final newsData = routeArgs["newsData"];
     return Scaffold(
       appBar: AppBar(title: AppTitle()),
       body: SafeArea(

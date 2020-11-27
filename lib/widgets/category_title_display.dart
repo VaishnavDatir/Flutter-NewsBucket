@@ -20,7 +20,7 @@ class CategoryTitleDisplayWidget extends StatelessWidget {
             arguments: {"caterogyName": cTitle, "caterogyImageUrl": cImgUrl});
       },
       child: Container(
-          margin: EdgeInsets.only(right: 10),
+          margin: EdgeInsets.only(right: 5, left: 5),
           padding: EdgeInsets.all(5),
           // width: 80,
           child: Column(

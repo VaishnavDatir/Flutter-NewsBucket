@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../helpers/themehelper.dart';
 import '../widgets/apptitle.dart';
+import '../helpers/user_preferences.dart';
 
 class AppDrawer extends StatelessWidget {
   final bool darkThemeEnabled;
@@ -9,6 +10,11 @@ class AppDrawer extends StatelessWidget {
   AppDrawer({this.darkThemeEnabled});
   @override
   Widget build(BuildContext context) {
+    name() {
+      UserPreferences().setdata(darkThemeEnabled);
+      return bloc.changeTheme;
+    }
+
     return Drawer(
       elevation: 10,
       child: Column(
@@ -28,17 +34,13 @@ class AppDrawer extends StatelessWidget {
             ),
             trailing: Switch(
               value: darkThemeEnabled,
-              onChanged: bloc.changeTheme,
+              onChanged: name(),
               activeColor: Colors.blue[700],
             ),
           ),
           const Divider(),
           InkWell(
             onTap: () {
-              // showAboutDialog(
-              //   context: context,
-              //   applicationVersion: "v1.5 Android",
-              // );
               showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
@@ -49,7 +51,7 @@ class AppDrawer extends StatelessWidget {
                             child: Column(
                               children: [
                                 const AppTitle(),
-                                const Text("v1.7 Android"),
+                                const Text("v1.8 Android"),
                                 const SizedBox(height: 7),
                                 const Text(
                                   "NewsBucket is a news app that selects latest and best news from national sources and summarises them to present in a short and less format.",
@@ -82,20 +84,6 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          // const Divider(),
-          // InkWell(
-          //   onTap: () {},
-          //   child: const ListTile(
-          //     leading: const Icon(Icons.feedback),
-          //     title: const Text(
-          //       "Feedback",
-          //       style: TextStyle(
-          //           fontSize: 17,
-          //           fontWeight: FontWeight.w500,
-          //           letterSpacing: 0.5),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

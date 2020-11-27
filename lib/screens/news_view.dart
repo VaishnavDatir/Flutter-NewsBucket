@@ -5,10 +5,6 @@ import '../widgets/apptitle.dart';
 
 class NewsView extends StatefulWidget {
   static const routeName = '/NewsVies';
-  /*  final String newsUrl;
-
-  NewsView({this.newsUrl}); */
-
   @override
   _NewsViewState createState() => _NewsViewState();
 }
@@ -24,8 +20,6 @@ class _NewsViewState extends State<NewsView> {
     final newsurl = routeArgs["newsUrl"];
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.white,
-        // elevation: 0,
         title: AppTitle(),
       ),
       body: Stack(

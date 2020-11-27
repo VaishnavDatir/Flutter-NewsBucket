@@ -6,7 +6,10 @@ import '../helpers/custom_route.dart';
 class Bloc {
   // ignore: close_sinks
   final _themeController = StreamController<bool>();
-  get changeTheme => _themeController.sink.add;
+  void Function(bool event) get changeTheme {
+    return _themeController.sink.add;
+  }
+
   get darkThemeEnabled => _themeController.stream;
 }
 
