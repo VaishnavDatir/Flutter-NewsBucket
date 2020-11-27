@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-mconstants.dart
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -31,9 +31,10 @@ mconstants.dart
 .pub/
 /build/
 
+lib/mconstants.dart
+
 # Web related
 lib/generated_plugin_registrant.dart
-
 # Symbolication related
 app.*.symbols
 
