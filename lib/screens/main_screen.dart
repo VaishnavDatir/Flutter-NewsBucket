@@ -5,7 +5,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import '../providers/categoryProvider.dart';
 import '../providers/news_artical_provider.dart';
-import '../providers/custom_search_articals_providers.dart';
 
 import '../widgets/category_title_display.dart';
 import '../widgets/news_article_display_widget.dart';
@@ -146,12 +145,6 @@ class _MainScreenState extends State<MainScreen> {
                                             shrinkWrap: true,
                                             itemCount:
                                                 data.newsarticalpro.length - 4,
-                                            /*  itemBuilder: (ctx, index) =>
-                                                      NewsArticleSingleRowWidget(
-                                                        newsArticalSingleRow:
-                                                            data.newsarticalpro[
-                                                                index + 4],
-                                                      ) */
                                             itemBuilder: (ctx, index) =>
                                                 SlideAnimationWidget(
                                                   index: index,
@@ -180,11 +173,6 @@ class _MainScreenState extends State<MainScreen> {
                                         ),
                                       );
                                     }
-                                    /* Column(
-                                            children: [
-                                              
-                                            ], 
-                                          );*/
                                   },
                                 );
                               }
@@ -204,7 +192,6 @@ class DataSearch extends SearchDelegate<String> {
   @override
   List<Widget> buildActions(BuildContext context) {
     // Actions for appbar
-    //throw UnimplementedError();
     return [
       IconButton(
         icon: Icon(Icons.clear),
@@ -218,8 +205,6 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildLeading(BuildContext context) {
     // Leading icon on the left of the app bar
-    // throw UnimplementedError();
-
     return IconButton(
       icon: AnimatedIcon(
         icon: AnimatedIcons.menu_arrow,
@@ -234,11 +219,6 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // show some result based on the selection
-    // throw UnimplementedError();
-    /*  return Navigator.of(context)
-        .pushNamed(CustomSearchNewsScreen.routeName, arguments: {
-      "searchQuery": query,
-    }); */
     return query.isEmpty
         ? buildSuggestions(context)
         : QuerySearch(query: query);
@@ -247,14 +227,7 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     //Show when someone searches for something
-    // final suggestionList = recentSearch;
 
-    // return ListView.builder(
-    //     itemCount: suggestionList.length,
-    //     itemBuilder: (ctx, index) => ListTile(
-    //           leading: Icon(Icons.history),
-    //           title: Text(suggestionList[index]),
-    //         ));
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -296,7 +269,7 @@ class QuerySearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder(
-        future: Provider.of<CustomSearchNewsArticalsProviders>(context)
+        future: Provider.of<NewsArticalProvider>(context)
             .fetchCustomSearchNews(query),
         builder: (ctx, dataSnapShot) {
           if (dataSnapShot.connectionState == ConnectionState.waiting) {
@@ -308,9 +281,8 @@ class QuerySearch extends StatelessWidget {
                   child: const Text(
                       "Error While Fetching Data\n Check Network Connection"));
             } else {
-              return Consumer<CustomSearchNewsArticalsProviders>(
-                  builder: (ctx, data, child) {
-                return data.customSearchNewsPro.isEmpty
+              return Consumer<NewsArticalProvider>(builder: (ctx, data, child) {
+                return data.newsarticalpro.isEmpty
                     ? Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         height: MediaQuery.of(context).size.height,
@@ -339,15 +311,14 @@ class QuerySearch extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
-                        itemCount: data.customSearchNewsPro.length,
+                        itemCount: data.newsarticalpro.length,
                         physics: ClampingScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (ctx, index) => SlideAnimationWidget(
                           index: index,
-                          itemCount: data.customSearchNewsPro.length,
+                          itemCount: data.newsarticalpro.length,
                           widgetToAnimate: NewsArticleSingleRowWidget(
-                            newsArticalSingleRow:
-                                data.customSearchNewsPro[index],
+                            newsArticalSingleRow: data.newsarticalpro[index],
                           ),
                         ),
                       );

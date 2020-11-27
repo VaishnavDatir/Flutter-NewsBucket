@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 
@@ -44,6 +45,11 @@ class NewsDisplayScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "${ndNewsArtical.sourceName} ${ndNewsArtical.autherName.isEmpty ? "" : " - " + ndNewsArtical.autherName}",
+                      style: GoogleFonts.poppins(
+                          fontSize: 15, color: Colors.grey[600]),
+                    ),
                     SelectableText(
                       ndNewsArtical.title,
                       style: GoogleFonts.poppins(
@@ -51,9 +57,13 @@ class NewsDisplayScreen extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    ndNewsArtical.publishedAt == null
+                        ? Container()
+                        : Text(
+                            DateFormat().format(ndNewsArtical.publishedAt),
+                            style: GoogleFonts.poppins(
+                                fontSize: 15, color: Colors.grey),
+                          ),
                     SelectableText(
                       ndNewsArtical.description,
                       style: GoogleFonts.montserrat(
@@ -93,7 +103,7 @@ class NewsDisplayScreen extends StatelessWidget {
             ndNewsArtical.newsUrl.isEmpty
                 ? const SizedBox()
                 : IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.open_in_new,
                       size: 30,
                     ),
@@ -103,7 +113,7 @@ class NewsDisplayScreen extends StatelessWidget {
                       Navigator.of(context).pushNamed(NewsView.routeName,
                           arguments: {"newsUrl": ndNewsArtical.newsUrl});
                     },
-                    tooltip: "Open in browser",
+                    tooltip: "Open webpage",
                   ),
           ],
         ),

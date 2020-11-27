@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../screens/news_display.dart';
 
 import '../widgets/image_not_ava.dart';
+import '../widgets/hero_fadeinimage_widget.dart';
 
 import '../models/news_artical_modal.dart' as nam;
 
@@ -42,22 +43,13 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                   bottomLeft: const Radius.circular(1),
                 ),
                 child: newsArtical.imageUrl.isEmpty
-                    ? ImageNotAvaWidget(
-                        isBig: true,
-                      )
+                    ? ImageNotAvaWidget(isBig: true)
                     : Container(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
-                        child: Hero(
-                          tag: newsArtical.title,
-                          child: FadeInImage(
-                            placeholder: const AssetImage(
-                                "dev_assets/NewsBucketLogo.png"),
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                              newsArtical.imageUrl,
-                            ),
-                          ),
+                        child: HeroAndFadeInImage(
+                          newsArticalTitle: newsArtical.title,
+                          newsArticalImageURL: newsArtical.imageUrl,
                         ),
                       ),
               ),

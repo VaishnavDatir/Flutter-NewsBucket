@@ -53,7 +53,7 @@ class _NewsViewState extends State<NewsView> {
               },
             ),
           ),
-          if (isLoading) Center(child: CircularProgressIndicator()),
+          if (isLoading) LinearProgressIndicator(),
         ],
       ),
     );

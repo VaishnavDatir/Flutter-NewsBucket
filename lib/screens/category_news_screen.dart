@@ -1,4 +1,3 @@
-import 'package:NewsBucket/providers/category_news_artical_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,6 +10,8 @@ import '../widgets/news_article_display_widget.dart';
 import '../widgets/connectivity_error.dart';
 
 import '../animation/slide_animation_widget.dart';
+
+import '../providers/news_artical_provider.dart';
 
 class CategoryNews extends StatelessWidget {
   static const routeName = '/CategoryNews';
@@ -28,7 +29,7 @@ class CategoryNews extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          await Provider.of<CategoryNewsArticalProvider>(context, listen: false)
+          await Provider.of<NewsArticalProvider>(context, listen: false)
               .fetchCategoryNews(categoryTitle);
           return _scafoldKey.currentState.showSnackBar(SnackBar(
             content: Text("Your viewing latest $categoryTitle news"),
@@ -38,7 +39,7 @@ class CategoryNews extends StatelessWidget {
           ));
         },
         child: FutureBuilder(
-          future: Provider.of<CategoryNewsArticalProvider>(context)
+          future: Provider.of<NewsArticalProvider>(context)
               .fetchCategoryNews(categoryTitle),
           builder: (ctx, dataSnapShot) {
             if (dataSnapShot.connectionState == ConnectionState.waiting) {
@@ -50,9 +51,9 @@ class CategoryNews extends StatelessWidget {
                     child: const Text(
                         "Error While Fetching Data\n Check Network Connection"));
               } else {
-                return Consumer<CategoryNewsArticalProvider>(
+                return Consumer<NewsArticalProvider>(
                     builder: (ctx, data, child) {
-                  if (data.categorynewsarticalpro.isEmpty)
+                  if (data.newsarticalpro.isEmpty)
                     return Center(child: ConnectivityError());
                   else {
                     final List _categoryNewsWidgets = [
@@ -61,13 +62,13 @@ class CategoryNews extends StatelessWidget {
                       CarouselSlider(
                         items: [
                           NewsArticleDisplayWidget(
-                              newsArtical: data.categorynewsarticalpro[0]),
+                              newsArtical: data.newsarticalpro[0]),
                           NewsArticleDisplayWidget(
-                              newsArtical: data.categorynewsarticalpro[1]),
+                              newsArtical: data.newsarticalpro[1]),
                           NewsArticleDisplayWidget(
-                              newsArtical: data.categorynewsarticalpro[2]),
+                              newsArtical: data.newsarticalpro[2]),
                           NewsArticleDisplayWidget(
-                              newsArtical: data.categorynewsarticalpro[3])
+                              newsArtical: data.newsarticalpro[3])
                         ],
                         options: CarouselOptions(
                             autoPlay: true,
@@ -80,13 +81,13 @@ class CategoryNews extends StatelessWidget {
                       HeadingAndDivider(
                           heading: "Top $categoryTitle News in India"),
                       ListView.builder(
-                          itemCount: data.categorynewsarticalpro.length - 4,
+                          itemCount: data.newsarticalpro.length - 4,
                           physics: ClampingScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (ctx, index) =>
                               NewsArticleSingleRowWidget(
                                 newsArticalSingleRow:
-                                    data.categorynewsarticalpro[index + 4],
+                                    data.newsarticalpro[index + 4],
                               )),
                     ];
                     return ListView.builder(

@@ -40,18 +40,11 @@ class AppTheme {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         dividerColor: Colors.blueAccent,
         hintColor: Colors.blue[800],
-
         inputDecorationTheme: InputDecorationTheme(
-          fillColor: Colors.black12,
+          fillColor: Colors.black87,
           filled: true,
           isCollapsed: true,
         ),
-        // appBarTheme: ThemeData.dark().appBarTheme.copyWith(
-        //     // color: Colors.white,
-        //     centerTitle: true,
-        //     elevation: 0,
-        //     iconTheme:
-        //         ThemeData.dark().iconTheme.copyWith(color: Colors.blue[900])),
         pageTransitionsTheme: PageTransitionsTheme(
             builders: {TargetPlatform.android: CustomPageTransitionBuilder()}),
       );
