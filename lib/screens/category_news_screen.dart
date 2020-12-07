@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 import '../widgets/apptitle.dart';
 import '../widgets/loading_screen_widget.dart';
-import '../widgets/news_article_single_row.dart';
-import '../widgets/heading_div_widget.dart';
-import '../widgets/news_article_display_widget.dart';
-import '../widgets/connectivity_error.dart';
-
-import '../animation/slide_animation_widget.dart';
+import '../widgets/screen_news_widget.dart';
 
 import '../providers/news_artical_provider.dart';
 
@@ -24,9 +18,7 @@ class CategoryNews extends StatelessWidget {
     final categoryTitle = routeArgs["caterogyName"];
     return Scaffold(
       key: _scafoldKey,
-      appBar: AppBar(
-        title: AppTitle(),
-      ),
+      appBar: AppBar(title: AppTitle()),
       body: RefreshIndicator(
         onRefresh: () async {
           await Provider.of<NewsArticalProvider>(context, listen: false)
@@ -53,54 +45,13 @@ class CategoryNews extends StatelessWidget {
               } else {
                 return Consumer<NewsArticalProvider>(
                     builder: (ctx, data, child) {
-                  if (data.newsarticalpro.isEmpty)
-                    return Center(child: ConnectivityError());
-                  else {
-                    final List _categoryNewsWidgets = [
-                      HeadingAndDivider(
-                          heading: "Trending $categoryTitle News"),
-                      CarouselSlider(
-                        items: [
-                          NewsArticleDisplayWidget(
-                              newsArtical: data.newsarticalpro[0]),
-                          NewsArticleDisplayWidget(
-                              newsArtical: data.newsarticalpro[1]),
-                          NewsArticleDisplayWidget(
-                              newsArtical: data.newsarticalpro[2]),
-                          NewsArticleDisplayWidget(
-                              newsArtical: data.newsarticalpro[3])
-                        ],
-                        options: CarouselOptions(
-                            autoPlay: true,
-                            height: 300,
-                            viewportFraction: 0.9,
-                            enlargeCenterPage: false,
-                            enableInfiniteScroll: false),
-                      ),
-                      SizedBox(height: 10),
-                      HeadingAndDivider(
-                          heading: "Top $categoryTitle News in India"),
-                      ListView.builder(
-                          itemCount: data.newsarticalpro.length - 4,
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (ctx, index) =>
-                              NewsArticleSingleRowWidget(
-                                newsArticalSingleRow:
-                                    data.newsarticalpro[index + 4],
-                              )),
-                    ];
-                    return ListView.builder(
-                      physics: ClampingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _categoryNewsWidgets.length,
-                      itemBuilder: (context, index) => SlideAnimationWidget(
-                        index: index,
-                        itemCount: _categoryNewsWidgets.length,
-                        widgetToAnimate: _categoryNewsWidgets[index],
-                      ),
-                    );
-                  }
+                  return ScreenNewsWidget(
+                    data: data,
+                    headings: [
+                      "Trending $categoryTitle News",
+                      "Top $categoryTitle News"
+                    ],
+                  );
                 });
               }
             }

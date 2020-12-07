@@ -12,7 +12,7 @@ class AppTitle extends StatelessWidget {
       text: TextSpan(
         text: 'News',
         style: GoogleFonts.ubuntu(
-          fontSize: 27,
+          fontSize: 23,
           // fontWeight: FontWeight.w400,
           color: Colors.orange[900],
         ),

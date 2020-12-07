@@ -10,27 +10,17 @@ import './screens/news_display.dart';
 
 import './helpers/themehelper.dart';
 import './helpers/user_preferences.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserPreferences().init();
-  final bool tf = UserPreferences().data ?? false;
-
-  if (tf) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.black,
-        systemNavigationBarIconBrightness: Brightness.light));
-  } else {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.white,
-        systemNavigationBarIconBrightness: Brightness.dark));
-  }
+  bloc.systemTheme();
+  print("RUNNING APP");
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

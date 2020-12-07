@@ -20,7 +20,8 @@ class ImageNotAvaWidget extends StatelessWidget {
               child: RichText(
                 text: TextSpan(
                   text: 'News',
-                  style: GoogleFonts.ubuntu(fontSize: 27, color: Colors.black),
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 27, color: Colors.orange[900]),
                   children: <TextSpan>[
                     TextSpan(
                         text: 'Bucket',
@@ -34,8 +35,7 @@ class ImageNotAvaWidget extends StatelessWidget {
             Text("Image Not Availabe",
                 maxLines: 2,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.ubuntu(
-                    fontSize: isBig ? 20 : 15, color: Colors.black))
+                style: GoogleFonts.ubuntu(fontSize: isBig ? 20 : 15))
           ],
         ),
       ),

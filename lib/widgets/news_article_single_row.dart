@@ -13,14 +13,14 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
   NewsArticleSingleRowWidget({this.newsArticalSingleRow});
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+    return Container(
+        // elevation: 0,
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(10.0),
+        // ),
+        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
         child: InkWell(
-          borderRadius: BorderRadius.circular(10.0),
+          // borderRadius: BorderRadius.circular(10.0),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -34,20 +34,15 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
             height: 100,
             child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(10),
-                      bottomLeft: const Radius.circular(10)),
-                  child: newsArticalSingleRow.imageUrl.isEmpty
-                      ? ImageNotAvaWidget(isBig: false)
-                      : Container(
-                          height: 100,
-                          width: 125,
-                          child: HeroAndFadeInImage(
-                              newsArticalTitle: newsArticalSingleRow.title,
-                              newsArticalImageURL:
-                                  newsArticalSingleRow.imageUrl)),
-                ),
+                newsArticalSingleRow.imageUrl.isEmpty
+                    ? ImageNotAvaWidget(isBig: false)
+                    : Container(
+                        height: 100,
+                        width: 125,
+                        child: HeroAndFadeInImage(
+                            newsArticalTitle: newsArticalSingleRow.title,
+                            newsArticalImageURL:
+                                newsArticalSingleRow.imageUrl)),
                 Expanded(
                     child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
@@ -60,8 +55,8 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
-                        style: GoogleFonts.poppins(
-                            fontSize: 14,
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
                             // color: Colors.black,
                             fontWeight: FontWeight.w600),
                       ),
@@ -70,6 +65,7 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                         child: Text(
                           "Know More >",
                           style: TextStyle(
+                              fontSize: 13,
                               fontWeight: FontWeight.w500,
                               color: Colors.blue[800]),
                         ),

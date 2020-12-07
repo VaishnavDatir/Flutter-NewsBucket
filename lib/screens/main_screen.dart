@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+
+import '../helpers/themehelper.dart';
 
 import '../providers/categoryProvider.dart';
 import '../providers/news_artical_provider.dart';
 
 import '../widgets/category_title_display.dart';
-import '../widgets/news_article_display_widget.dart';
 import '../widgets/apptitle.dart';
 import '../widgets/loading_screen_widget.dart';
 import '../widgets/news_article_single_row.dart';
-import '../widgets/update_date_time_widget.dart';
-import '../widgets/heading_div_widget.dart';
 import '../widgets/appdrawer.dart';
-import '../widgets/connectivity_error.dart';
+import '../widgets/screen_news_widget.dart';
 
 import '../animation/slide_animation_widget.dart';
 
@@ -32,6 +30,14 @@ class _MainScreenState extends State<MainScreen> {
   DateTime dateTime = DateTime.now();
 
   @override
+  void dispose() {
+    print("MAIN SCREEN DISPOSED");
+    bloc.themedispose();
+    bloc.systemTheme();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scafoldKey,
@@ -40,8 +46,8 @@ class _MainScreenState extends State<MainScreen> {
           onRefresh: () async {
             setState(() {
               dateTime = DateTime.now();
+              bloc.systemTheme();
             });
-
             await Provider.of<NewsArticalProvider>(context, listen: false)
                 .fetchTopHeadlines();
             return _scafoldKey.currentState.showSnackBar(SnackBar(
@@ -108,71 +114,10 @@ class _MainScreenState extends State<MainScreen> {
                               } else {
                                 return Consumer<NewsArticalProvider>(
                                   builder: (ctx, data, child) {
-                                    if (data.newsarticalpro.isEmpty) {
-                                      return ConnectivityError();
-                                    } else {
-                                      final List _mainScreenWidgets = [
-                                        SizedBox(height: 10),
-                                        HeadingAndDivider(
-                                            heading: "Trending in India"),
-                                        CarouselSlider(
-                                          items: [
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[0]),
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[1]),
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[2]),
-                                            NewsArticleDisplayWidget(
-                                                newsArtical:
-                                                    data.newsarticalpro[3])
-                                          ],
-                                          options: CarouselOptions(
-                                              autoPlay: true,
-                                              height: 300,
-                                              viewportFraction: 0.9,
-                                              enlargeCenterPage: false,
-                                              enableInfiniteScroll: false),
-                                        ),
-                                        SizedBox(height: 10),
-                                        HeadingAndDivider(
-                                            heading: "Top headlines in India"),
-                                        ListView.builder(
-                                            physics: ClampingScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount:
-                                                data.newsarticalpro.length - 4,
-                                            itemBuilder: (ctx, index) =>
-                                                SlideAnimationWidget(
-                                                  index: index,
-                                                  itemCount: data.newsarticalpro
-                                                          .length -
-                                                      4,
-                                                  widgetToAnimate:
-                                                      NewsArticleSingleRowWidget(
-                                                    newsArticalSingleRow:
-                                                        data.newsarticalpro[
-                                                            index + 4],
-                                                  ),
-                                                )),
-                                        UpdateDateAndTime(dateTime: dateTime),
-                                      ];
-                                      return ListView.builder(
-                                        physics: ClampingScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount: _mainScreenWidgets.length,
-                                        itemBuilder: (context, index) =>
-                                            SlideAnimationWidget(
-                                          index: index,
-                                          itemCount: _mainScreenWidgets.length,
-                                          widgetToAnimate:
-                                              _mainScreenWidgets[index],
-                                        ),
-                                      );
-                                    }
+                                    return ScreenNewsWidget(
+                                      data: data,
+                                      headings: ["Trending News", "Top News"],
+                                    );
                                   },
                                 );
                               }
@@ -189,6 +134,20 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class DataSearch extends SearchDelegate<String> {
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    assert(context != null);
+    final ThemeData theme = Theme.of(context);
+    assert(theme != null);
+    return theme.copyWith(
+      // primaryColor: Colors.orange[900],
+      primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.orange),
+      textTheme: theme.textTheme.copyWith(
+        headline6: TextStyle(color: Colors.orange, fontSize: 19),
+      ),
+    );
+  }
+
   @override
   List<Widget> buildActions(BuildContext context) {
     // Actions for appbar

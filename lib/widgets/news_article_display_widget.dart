@@ -14,14 +14,14 @@ class NewsArticleDisplayWidget extends StatelessWidget {
   NewsArticleDisplayWidget({this.newsArtical});
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+    return Container(
+      // elevation: 2,
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.circular(7),
+      // ),
       margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
       child: InkWell(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(7),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -32,15 +32,14 @@ class NewsArticleDisplayWidget extends StatelessWidget {
           );
         },
         child: Container(
-          height: 300,
           child: Column(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(10),
-                  topRight: const Radius.circular(10),
-                  bottomRight: const Radius.circular(1),
-                  bottomLeft: const Radius.circular(1),
+                  topLeft: const Radius.circular(7),
+                  topRight: const Radius.circular(7),
+                  bottomRight: const Radius.circular(7),
+                  bottomLeft: const Radius.circular(7),
                 ),
                 child: newsArtical.imageUrl.isEmpty
                     ? ImageNotAvaWidget(isBig: true)
@@ -60,8 +59,8 @@ class NewsArticleDisplayWidget extends StatelessWidget {
                   child: Text(newsArtical.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
-                      style: GoogleFonts.poppins(
-                          fontSize: 16,
+                      style: GoogleFonts.roboto(
+                          fontSize: 18,
                           // color: Colors.black,
                           fontWeight: FontWeight.w600)),
                 ),
