@@ -2,7 +2,18 @@
 
 A News Application that selects latest and best news from national sources and summarises them to present in a short.
 
-<img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/NewsBucket%20ScreenShots%20(1).jpeg" width="270"> <img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/NewsBucket%20ScreenShots%20(5).jpeg" width="270"> <img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/NewsBucket%20ScreenShots%20(6).jpeg" width="270"> <img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/NewsBucket%20ScreenShots%20(3).jpeg" width="270"> <img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/NewsBucket%20ScreenShots%20(4).jpeg" width="270"> <img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/NewsBucket%20ScreenShots%20(2).jpeg" width="270"> <img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/NewsBucket%20ScreenShots%20(7).jpeg" width="540">
+<img src="https://github.com/VaishnavDatir/Flutter-NewsBucket/blob/master/SCREENSHOTS/mock.png"> <br>
+
+## Features
+<ul>
+  <li>Dark mode
+  <li>Share content via Whatsapp, Gmail, Facebook, Instagram, etc by just clicking share button
+  <li>Category wise news availabe
+  <li>Looking for a particular news related to a past or ongoing topic? Use the seeach button 
+  <li>Can copy the text form the news screen
+  <li>Portrait as well as Landscape view available
+</ul>
+
 
 ## Getting Started
 This is a flutter project
