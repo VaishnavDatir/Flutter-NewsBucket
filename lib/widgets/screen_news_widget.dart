@@ -32,14 +32,15 @@ class ScreenNewsWidget extends StatelessWidget {
           ],
           options: CarouselOptions(
               autoPlay: true,
-              height: 290,
+              height: 300,
               viewportFraction: 1,
               enlargeCenterPage: true,
               enableInfiniteScroll: false),
         ),
-        // SizedBox(height: 5),
+        SizedBox(height: 5),
         HeadingAndDivider(heading: headings[1]),
-        ListView.builder(
+        ListView.separated(
+            separatorBuilder: (context, index) => Divider(),
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             itemCount: data.newsarticalpro.length - 4,

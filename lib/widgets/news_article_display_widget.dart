@@ -19,7 +19,7 @@ class NewsArticleDisplayWidget extends StatelessWidget {
       // shape: RoundedRectangleBorder(
       //   borderRadius: BorderRadius.circular(7),
       // ),
-      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
       child: InkWell(
         borderRadius: BorderRadius.circular(7),
         onTap: () {
@@ -31,41 +31,40 @@ class NewsArticleDisplayWidget extends StatelessWidget {
             ),
           );
         },
-        child: Container(
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(7),
-                  topRight: const Radius.circular(7),
-                  bottomRight: const Radius.circular(7),
-                  bottomLeft: const Radius.circular(7),
-                ),
-                child: newsArtical.imageUrl.isEmpty
-                    ? ImageNotAvaWidget(isBig: true)
-                    : Container(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width,
-                        child: HeroAndFadeInImage(
-                          newsArticalTitle: newsArtical.title,
-                          newsArticalImageURL: newsArtical.imageUrl,
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: 8.0, right: 8.0, top: 8.0, bottom: 5.0),
+          child: Container(
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(7)),
+                  child: newsArtical.imageUrl.isEmpty
+                      ? ImageNotAvaWidget(isBig: true)
+                      : Container(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width,
+                          child: HeroAndFadeInImage(
+                            newsArticalTitle: newsArtical.title,
+                            newsArticalImageURL: newsArtical.imageUrl,
+                          ),
                         ),
-                      ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-                  child: Text(newsArtical.title,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                      style: GoogleFonts.roboto(
-                          fontSize: 18,
-                          // color: Colors.black,
-                          fontWeight: FontWeight.w600)),
                 ),
-              )
-            ],
+                Expanded(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                    child: Text(newsArtical.title,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        style: GoogleFonts.roboto(
+                            fontSize: 18,
+                            // color: Colors.black,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

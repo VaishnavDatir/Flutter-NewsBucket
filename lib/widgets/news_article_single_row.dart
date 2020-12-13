@@ -18,23 +18,27 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
         // shape: RoundedRectangleBorder(
         //   borderRadius: BorderRadius.circular(10.0),
         // ),
-        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+        // margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: InkWell(
-          // borderRadius: BorderRadius.circular(10.0),
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => NewsDisplayScreen(
-                  ndNewsArtical: newsArticalSingleRow,
-                ),
-              ),
-            );
-          },
-          child: Container(
-            height: 100,
-            child: Row(
-              children: [
-                newsArticalSingleRow.imageUrl.isEmpty
+      borderRadius: BorderRadius.circular(2.0),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => NewsDisplayScreen(
+              ndNewsArtical: newsArticalSingleRow,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        height: 100,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: newsArticalSingleRow.imageUrl.isEmpty
                     ? ImageNotAvaWidget(isBig: false)
                     : Container(
                         height: 100,
@@ -43,39 +47,41 @@ class NewsArticleSingleRowWidget extends StatelessWidget {
                             newsArticalTitle: newsArticalSingleRow.title,
                             newsArticalImageURL:
                                 newsArticalSingleRow.imageUrl)),
-                Expanded(
-                    child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        newsArticalSingleRow.title,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                        style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            // color: Colors.black,
-                            fontWeight: FontWeight.w600),
+              ),
+              Expanded(
+                  child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      newsArticalSingleRow.title,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                      style: GoogleFonts.roboto(
+                          fontSize: 16,
+                          // color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "Know More >",
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blue[800]),
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          "Know More >",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.blue[800]),
-                        ),
-                      )
-                    ],
-                  ),
-                ))
-              ],
-            ),
+                    )
+                  ],
+                ),
+              ))
+            ],
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }

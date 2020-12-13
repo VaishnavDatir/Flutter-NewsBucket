@@ -10,7 +10,6 @@ import './screens/news_display.dart';
 
 import './helpers/themehelper.dart';
 import './helpers/user_preferences.dart';
-// import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
