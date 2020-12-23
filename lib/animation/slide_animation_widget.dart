@@ -32,7 +32,7 @@ class _SlideAnimationWidgetState extends State<SlideAnimationWidget>
     return SlideAnimation(
         position: widget.index,
         itemCount: widget.itemCount,
-        slideDirection: SlideDirection.fromTop,
+        slideDirection: SlideDirection.fromBottom,
         animationController: _animationController,
         child: widget.widgetToAnimate);
   }

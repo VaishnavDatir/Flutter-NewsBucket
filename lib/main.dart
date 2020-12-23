@@ -7,6 +7,7 @@ import './screens/main_screen.dart';
 import './screens/news_view.dart';
 import './screens/category_news_screen.dart';
 import './screens/news_display.dart';
+import './screens/bookmark_screen.dart';
 
 import './helpers/themehelper.dart';
 import './helpers/user_preferences.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
                 NewsView.routeName: (ctx) => NewsView(),
                 CategoryNews.routeName: (ctx) => CategoryNews(),
                 NewsDisplayScreen.routeName: (ctx) => NewsDisplayScreen(),
+                BookMarkScreen.routeName: (ctx) => BookMarkScreen(),
               },
             );
           }),

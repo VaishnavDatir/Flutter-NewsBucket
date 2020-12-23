@@ -30,14 +30,6 @@ class _MainScreenState extends State<MainScreen> {
   DateTime dateTime = DateTime.now();
 
   @override
-  void dispose() {
-    print("MAIN SCREEN DISPOSED");
-    bloc.themedispose();
-    bloc.systemTheme();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scafoldKey,

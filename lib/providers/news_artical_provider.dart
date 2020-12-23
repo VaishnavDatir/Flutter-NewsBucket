@@ -6,11 +6,15 @@ import '../mconstants.dart';
 
 import '../models/news_artical_modal.dart';
 
+import '../helpers/db_helper.dart';
+
 class NewsArticalProvider with ChangeNotifier {
   List<NewsArticalModal> _newsarticalpro = [];
   List<NewsArticalModal> get newsarticalpro {
     return [..._newsarticalpro];
   }
+
+  bool isbk = true;
 
   Future<void> fetchTopHeadlines() async {
     try {
@@ -66,11 +70,23 @@ class NewsArticalProvider with ChangeNotifier {
           description: element["description"] ?? "",
           newsUrl: element["url"] ?? "",
           imageUrl: element["urlToImage"] ?? "",
-          publishedAt: DateTime.parse(element["publishedAt"]) ?? null,
         ));
       });
       // print(articalsDummy.length);
       _newsarticalpro = articalsDummy;
     }
+  }
+
+  Future<void> fetchandSet() async {
+    final dataList = await DBHelper.getData("user_savedNews");
+    _newsarticalpro = dataList
+        .map((item) => NewsArticalModal(
+            title: item["title"],
+            sourceName: item["sourcename"],
+            autherName: item["author"],
+            description: item["desc"],
+            newsUrl: item["newsurl"],
+            imageUrl: item["imageurl"]))
+        .toList();
   }
 }

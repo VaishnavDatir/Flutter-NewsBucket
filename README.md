@@ -12,6 +12,7 @@ A News Application that selects latest and best news from national sources and s
   <li>Looking for a particular news related to a past or ongoing topic? Use the seeach button 
   <li>Can copy the text form the news screen
   <li>Portrait as well as Landscape view available
+  <li>Bookmark news feature added
 </ul>
 
 

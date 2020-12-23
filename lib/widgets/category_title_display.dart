@@ -46,49 +46,7 @@ class CategoryTitleDisplayWidget extends StatelessWidget {
                     fontWeight: FontWeight.w500),
               ),
             ],
-          )
-
-          /* Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.asset(
-                cImgUrl,
-                height: 75,
-                width: 125,
-              ),
-              // child: CachedNetworkImage(
-              //   imageUrl: cImgUrl,
-              //   height: 75,
-              //   width: 125,
-              //   fit: BoxFit.cover,
-              // ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: 75,
-              width: 125,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.black45),
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 6),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    cTitle,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.workSans(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ), */
-          ),
+          )),
     );
   }
 }

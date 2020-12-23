@@ -62,7 +62,7 @@ class LoadingScreenWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: 60.0,
+                          width: 120.0,
                           height: 70.0,
                           color: Colors.white,
                         ),

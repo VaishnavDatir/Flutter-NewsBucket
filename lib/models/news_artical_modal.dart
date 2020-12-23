@@ -7,7 +7,6 @@ class NewsArticalModal with ChangeNotifier {
   final String description;
   final String newsUrl;
   final String imageUrl;
-  final DateTime publishedAt;
 
   NewsArticalModal({
     @required this.title,
@@ -16,6 +15,5 @@ class NewsArticalModal with ChangeNotifier {
     @required this.description,
     @required this.newsUrl,
     @required this.imageUrl,
-    @required this.publishedAt,
   });
 }

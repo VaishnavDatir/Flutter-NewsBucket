@@ -21,7 +21,7 @@ class CategoryNews extends StatelessWidget {
       appBar: AppBar(title: AppTitle()),
       body: RefreshIndicator(
         onRefresh: () async {
-          await Provider.of<NewsArticalProvider>(context, listen: false)
+          await Provider.of<NewsArticalProvider>(context)
               .fetchCategoryNews(categoryTitle);
           return _scafoldKey.currentState.showSnackBar(SnackBar(
             content: Text("Your viewing latest $categoryTitle news"),

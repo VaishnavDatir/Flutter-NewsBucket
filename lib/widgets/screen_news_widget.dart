@@ -6,7 +6,6 @@ import '../widgets/heading_div_widget.dart';
 import '../widgets/news_article_display_widget.dart';
 import '../widgets/news_article_single_row.dart';
 import '../widgets/connectivity_error.dart';
-
 import '../animation/slide_animation_widget.dart';
 
 import '../providers/news_artical_provider.dart' as nap;
@@ -40,7 +39,9 @@ class ScreenNewsWidget extends StatelessWidget {
         SizedBox(height: 5),
         HeadingAndDivider(heading: headings[1]),
         ListView.separated(
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => Divider(
+                  indent: 132,
+                ),
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             itemCount: data.newsarticalpro.length - 4,

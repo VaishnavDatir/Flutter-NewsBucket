@@ -4,6 +4,8 @@ import '../helpers/themehelper.dart';
 import '../widgets/apptitle.dart';
 import '../helpers/user_preferences.dart';
 
+import '../screens/bookmark_screen.dart';
+
 class AppDrawer extends StatefulWidget {
   final bool darkThemeEnabled;
 
@@ -33,11 +35,18 @@ class _AppDrawerState extends State<AppDrawer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              /* Padding(
                   padding: EdgeInsets.only(
                       left: 15, top: MediaQuery.of(context).padding.top + 10),
                   child: AppTitle()),
-              Divider(),
+              Divider(), */
+              Container(
+                width: double.infinity,
+                child: Image.asset(
+                  "dev_assets/NewsBucketLogo.png",
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
               SwitchListTile(
                 title: const Text(
                   "Dark Mode",
@@ -51,8 +60,27 @@ class _AppDrawerState extends State<AppDrawer> {
                 onChanged: name(),
                 activeColor: Colors.blue[700],
               ),
-              const Divider(),
-              InkWell(
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.bookmark),
+                title: Text("Saved News",
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0.5)),
+                onTap: () => Navigator.of(context)
+                    .popAndPushNamed(BookMarkScreen.routeName),
+              ),
+              Divider(),
+              ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text(
+                  "About App",
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.5),
+                ),
                 onTap: () {
                   showDialog(
                       context: context,
@@ -86,16 +114,6 @@ class _AppDrawerState extends State<AppDrawer> {
                           ),
                       barrierDismissible: true);
                 },
-                child: const ListTile(
-                  leading: const Icon(Icons.info),
-                  title: const Text(
-                    "About App",
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.5),
-                  ),
-                ),
               ),
             ],
           ),
