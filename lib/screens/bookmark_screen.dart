@@ -48,7 +48,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                             height: 10,
                           ),
                           const Text(
-                            "You have not saved any news",
+                            "There are no bookmarked news",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/image_not_ava.dart';
+
 class HeroAndFadeInImage extends StatelessWidget {
   final String newsArticalTitle;
   final String newsArticalImageURL;
@@ -18,6 +20,9 @@ class HeroAndFadeInImage extends StatelessWidget {
         fit: BoxFit.cover,
         image: NetworkImage(
           newsArticalImageURL,
+        ),
+        imageErrorBuilder: (context, error, stackTrace) => ImageNotAvaWidget(
+          isBig: false,
         ),
       ),
     );

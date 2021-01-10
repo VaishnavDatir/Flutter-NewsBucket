@@ -35,18 +35,18 @@ class _AppDrawerState extends State<AppDrawer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /* Padding(
+              Padding(
                   padding: EdgeInsets.only(
                       left: 15, top: MediaQuery.of(context).padding.top + 10),
                   child: AppTitle()),
-              Divider(), */
-              Container(
+              Divider(),
+              /* Container(
                 width: double.infinity,
                 child: Image.asset(
                   "dev_assets/NewsBucketLogo.png",
                   fit: BoxFit.fitWidth,
                 ),
-              ),
+              ), */
               SwitchListTile(
                 title: const Text(
                   "Dark Mode",
@@ -92,7 +92,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 child: Column(
                                   children: [
                                     const AppTitle(),
-                                    const Text("v1.9 Android"),
+                                    const Text("v1.10 Android"),
                                     const SizedBox(height: 7),
                                     const Text(
                                       "NewsBucket is a news app that selects latest and best news from national sources and summarises them to present in a short.",

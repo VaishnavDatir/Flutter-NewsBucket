@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
@@ -25,7 +26,6 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       appBar: AppBar(title: AppTitle()),
       body: SingleChildScrollView(
         child: Column(
@@ -39,6 +39,11 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                     child: Image.network(
                       widget.ndNewsArtical.imageUrl,
                       fit: BoxFit.fitWidth,
+                      errorBuilder: (context, error, stackTrace) {
+                        return ImageNotAvaWidget(
+                          isBig: true,
+                        );
+                      },
                     ),
                   ),
             Container(
@@ -53,7 +58,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                         fontSize: 15, color: Colors.grey[600]),
                   ),
                   SelectableText(
-                    widget.ndNewsArtical.title,
+                    widget.ndNewsArtical.title.split(" - ")[0],
                     style: GoogleFonts.roboto(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -65,7 +70,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                   SelectableText(
                     widget.ndNewsArtical.description.contains("…")
                         ? widget.ndNewsArtical.description +
-                            "\nTo know more, Visit our website."
+                            "\nTo know more, Visit ${widget.ndNewsArtical.sourceName} website."
                         : widget.ndNewsArtical.description,
                     style: GoogleFonts.dmSans(
                         fontSize: 20, fontWeight: FontWeight.w300),
@@ -86,7 +91,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
-                  icon: Icon(Icons.share),
+                  icon: const Icon(Icons.share),
                   onPressed: () {
                     final RenderBox box = context.findRenderObject();
                     const String appTitle = "*NewsBucket*\n";
@@ -127,18 +132,20 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                       "user_savedNews", widget.ndNewsArtical.title),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Icon(
-                        Icons.bookmark,
-                        size: 30,
-                      );
+                      return const CircularProgressIndicator();
                     } else {
+                      bool res = snapshot.data;
+
                       return IconButton(
                           icon: snapshot.data
                               ? Icon(Icons.bookmark)
                               : Icon(Icons.bookmark_outline),
                           iconSize: 30,
+                          splashRadius: 25,
+                          tooltip: res
+                              ? "Remove this news from save"
+                              : "Save this news",
                           onPressed: () {
-                            bool res;
                             if (snapshot.data) {
                               res = deleteData(widget.ndNewsArtical.title);
                             } else {
@@ -146,8 +153,8 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                             }
                             Scaffold.of(context).showSnackBar(SnackBar(
                               content: Text(res
-                                  ? "News added to bookmark"
-                                  : "News removed from bookmark"),
+                                  ? "Added to saved news"
+                                  : "Removed from saved news"),
                               duration: Duration(seconds: 2),
                               elevation: 6.0,
                               behavior: SnackBarBehavior.floating,

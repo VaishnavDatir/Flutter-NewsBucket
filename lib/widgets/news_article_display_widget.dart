@@ -33,7 +33,10 @@ class NewsArticleDisplayWidget extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.only(
-              left: 8.0, right: 8.0, top: 8.0, bottom: 5.0),
+            left: 8.0,
+            right: 8.0,
+            top: 8.0,
+          ),
           child: Container(
             child: Column(
               children: [

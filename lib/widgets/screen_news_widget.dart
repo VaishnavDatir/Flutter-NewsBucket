@@ -31,7 +31,7 @@ class ScreenNewsWidget extends StatelessWidget {
           ],
           options: CarouselOptions(
               autoPlay: true,
-              height: 300,
+              height: 290,
               viewportFraction: 1,
               enlargeCenterPage: true,
               enableInfiniteScroll: false),

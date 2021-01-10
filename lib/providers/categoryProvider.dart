@@ -5,10 +5,11 @@ const Categories_Data = const [
   CategoryModel(
       categoryTitle: "Business", categoryImgUrl: "assets/business.png"),
 
-  //2 Entertainment
-  CategoryModel(
-      categoryTitle: "Entertainment",
-      categoryImgUrl: "assets/entertainment.png"),
+  //7 Technology
+  CategoryModel(categoryTitle: "Tech", categoryImgUrl: "assets/technology.png"),
+
+  //5 Science
+  CategoryModel(categoryTitle: "Science", categoryImgUrl: "assets/science.png"),
 
 /* //3 General
   CategoryModel(
@@ -19,13 +20,11 @@ const Categories_Data = const [
   //4 Health
   CategoryModel(categoryTitle: "Health", categoryImgUrl: "assets/health.png"),
 
-  //5 Science
-  CategoryModel(categoryTitle: "Science", categoryImgUrl: "assets/science.png"),
-
   //6 Sports
   CategoryModel(categoryTitle: "Sports", categoryImgUrl: "assets/sport.png"),
 
-  //7 Technology
+  //2 Entertainment
   CategoryModel(
-      categoryTitle: "Technology", categoryImgUrl: "assets/technology.png"),
+      categoryTitle: "Entertainment",
+      categoryImgUrl: "assets/entertainment.png"),
 ];

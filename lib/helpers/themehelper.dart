@@ -54,6 +54,7 @@ class AppTheme {
             iconTheme:
                 ThemeData.light().iconTheme.copyWith(color: Colors.blue[900])),
         // splashColor: Colors.grey[50],
+        dividerTheme: DividerThemeData(thickness: 1.2, space: 7),
         scaffoldBackgroundColor: Colors.white,
         pageTransitionsTheme: PageTransitionsTheme(
             builders: {TargetPlatform.android: CustomPageTransitionBuilder()}),
@@ -72,7 +73,8 @@ class AppTheme {
                 ThemeData.dark().iconTheme.copyWith(color: Colors.blue[700])),
         scaffoldBackgroundColor: Colors.black,
         accentColor: Colors.blue,
-        dividerColor: Colors.blue[800],
+        dividerTheme:
+            DividerThemeData(thickness: 1.2, color: Colors.blue[800], space: 7),
         pageTransitionsTheme: PageTransitionsTheme(
             builders: {TargetPlatform.android: CustomPageTransitionBuilder()}),
       );

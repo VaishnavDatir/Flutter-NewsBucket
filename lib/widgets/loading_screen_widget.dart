@@ -18,7 +18,7 @@ class LoadingScreenWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width - 50,
+                  width: MediaQuery.of(context).size.width * 0.6,
                   height: 15,
                   color: Colors.white,
                 ),
@@ -26,7 +26,9 @@ class LoadingScreenWidget extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 230,
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(7))),
                 ),
                 SizedBox(height: 7),
                 Container(
@@ -42,13 +44,13 @@ class LoadingScreenWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 3),
                 Container(
-                  width: MediaQuery.of(context).size.width - 10,
+                  width: MediaQuery.of(context).size.width * 0.7,
                   height: 15,
                   color: Colors.white,
                 ),
                 SizedBox(height: 13),
                 Container(
-                  width: MediaQuery.of(context).size.width - 50,
+                  width: MediaQuery.of(context).size.width * 0.6,
                   height: 15,
                   color: Colors.white,
                 ),
@@ -63,8 +65,11 @@ class LoadingScreenWidget extends StatelessWidget {
                       children: [
                         Container(
                           width: 120.0,
-                          height: 70.0,
-                          color: Colors.white,
+                          height: 85.0,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
