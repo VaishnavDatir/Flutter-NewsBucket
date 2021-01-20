@@ -31,7 +31,7 @@ class ScreenNewsWidget extends StatelessWidget {
           ],
           options: CarouselOptions(
               autoPlay: true,
-              height: 290,
+              height: 300,
               viewportFraction: 1,
               enlargeCenterPage: true,
               enableInfiniteScroll: false),
@@ -40,7 +40,8 @@ class ScreenNewsWidget extends StatelessWidget {
         HeadingAndDivider(heading: headings[1]),
         ListView.separated(
             separatorBuilder: (context, index) => Divider(
-                  indent: 132,
+                  indent: 135,
+                  endIndent: 10,
                 ),
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,

@@ -25,7 +25,7 @@ class _AppDrawerState extends State<AppDrawer> {
     }
 
     setState(() {
-      drawerColour = widget.darkThemeEnabled ? Colors.black : Colors.white;
+      drawerColour = widget.darkThemeEnabled ? Color(0xff1A1A1A) : Colors.white;
     });
     return Drawer(
       elevation: 0,

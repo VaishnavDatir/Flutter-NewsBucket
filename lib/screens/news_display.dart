@@ -85,7 +85,9 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
         children: [
-          Divider(),
+          Divider(
+            thickness: 0,
+          ),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

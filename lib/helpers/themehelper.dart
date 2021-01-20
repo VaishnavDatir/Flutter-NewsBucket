@@ -25,8 +25,8 @@ class Bloc {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.light,
-          statusBarColor: Colors.transparent,
-          systemNavigationBarColor: Colors.black,
+          statusBarColor: Color(0xff1A1A1A),
+          systemNavigationBarColor: Color(0xff1A1A1A),
           systemNavigationBarIconBrightness: Brightness.light));
     } else {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -65,13 +65,13 @@ class AppTheme {
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: ThemeData.dark().appBarTheme.copyWith(
-            color: Colors.black,
+            color: Color(0xff1A1A1A),
             // centerTitle: true,
             elevation: 1,
             brightness: Brightness.dark,
             iconTheme:
                 ThemeData.dark().iconTheme.copyWith(color: Colors.blue[700])),
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: Color(0xff1A1A1A),
         accentColor: Colors.blue,
         dividerTheme:
             DividerThemeData(thickness: 1.2, color: Colors.blue[800], space: 7),
